@@ -67,18 +67,25 @@ const RegisterLogin = () => {
         e.preventDefault();
         axios.post("http://localhost:8080/api/login", user1)
             .then(res => {
+                console.log(res.data.user)
                 sessionStorage.setItem("jwt",res.data.jwt);
-                sessionStorage.setItem("userId",`${res.data.user.userId}`);
+                sessionStorage.setItem("user",JSON.stringify(res.data?res.data.user:null));
                 alert(res.data.user.firstName)
                 //setLoginUser(res.data.user)
                 //alert(res.data.user.roles)
                 console.log(res.data)
                 console.log(res)
+                if(res.data.user.roles.length===0)
+                history.push("/addRole")
+                else
                 if (res.data.user.roles.length===1) {
 
                     history1.push("/" + res.data.user.roles[0])
                     
                     //alert(res.data.user.roles[0])
+                }
+                else{
+                    history.push("/roles")
                 }
             }).catch(err=>{console.log(err)})
 
