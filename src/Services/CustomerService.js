@@ -1,23 +1,34 @@
 
+import { useEffect } from 'react';
 import httpClient from './http-common';
 
 // const jwt=sessionStorage.getItem("jwt");
 
-const user=JSON.parse(sessionStorage.getItem("user"));
 
+
+
+const getLicenseNo=()=>{
+    const  user=JSON.parse(sessionStorage.getItem("user"));
+return httpClient.get(`/customers/${user.userId}`);
+}
 
 const getAllVechiles=()=>{
-    return httpClient.get(`/customers/${user.userId}`)
+    
+                  const  user=JSON.parse(sessionStorage.getItem("user"));
+    return httpClient.get(`/customers/${user.userId}/vehicles`)
 }
 const addVehicle=(vehicle)=>{
-    return httpClient.post(`/customers/${user.userId}`,vehicle)
+    const user=JSON.parse(sessionStorage.getItem("user"));
+    return httpClient.post(`/customers/${user.userId}/vehicles`,vehicle)
 }
-const subscribePolicy=(data)=>{
-    return httpClient.get(`/customers/${user.userId}/addPolicy?vehicleId=${data.vehicleId}&policyId=${data.policyId}`)
+const subscribePolicy=(vid,policyId)=>{
+    const user=JSON.parse(sessionStorage.getItem("user"));
+    return httpClient.get(`/customers/${user.userId}/vehicles/${vid}addPolicy?policyId=${policyId}`)
 }
 const DeleteVechile=(vid)=>{
+    const user=JSON.parse(sessionStorage.getItem("user"));
     return httpClient.delete(`/customers/${user.userId}/vehicles/${vid}`)
 }
 
-export default {getAllVechiles,addVehicle,subscribePolicy,DeleteVechile};
+export default {getAllVechiles,addVehicle,getLicenseNo,subscribePolicy,DeleteVechile};
   

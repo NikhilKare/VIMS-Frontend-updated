@@ -2,7 +2,7 @@ import React, { useState,useEffect } from "react";
 import "./navbar.css";
 import { Button } from './Button';
 import "./Button.css";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import {
   FaFacebookSquare,
   FaInstagramSquare,
@@ -11,10 +11,17 @@ import {
 import { GiHamburgerMenu } from "react-icons/gi";
 
 import { NavLink } from "react-router-dom";
+import Authorization from "../../Authorization";
 
-const Navbar = () => {
-
+const Navbar = (props) => {
+  const history=useHistory();
   const [showMediaIcons, setShowMediaIcons] = useState(false);
+const logout=()=>{
+  sessionStorage.clear();
+  props.setLogIn(false);
+  history.push("/");
+}
+
   return (
     <>
     
@@ -46,8 +53,8 @@ const Navbar = () => {
               <NavLink to="/contact">contact</NavLink>
             </li>
             <div className="login">
-            <li>
-            <NavLink to="/sign-up-in">LOGIN/REGISTER</NavLink>
+            <li onClick={props.IsLoggedIn?logout:""}>
+            <NavLink to={props.IsLoggedIn?"":"/sign-up-in"}>{props.IsLoggedIn?"Logout":`LOGIN/REGISTER`}</NavLink>
             </li>
             </div>
           </ul>

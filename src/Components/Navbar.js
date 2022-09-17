@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import Authorization from '../Authorization';
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -59,19 +60,20 @@ function Navbar() {
                 Products
               </Link>
             </li>
-
-            <li>
+            {console.log(Authorization.IsLoggedIn())}
+            
+          <li>
               <Link
                 to='/sign-up-in'
                 className='nav-links-mobile'
                 onClick={closeMobileMenu}
               >
-                LOGIN/REGISTER
+                LOGIN/REGISTER 
               </Link>
             </li>
-            
+
           </ul>
-          {button && <Button url='/sign-up-in' buttonStyle='btn--outline'>LOGIN/REGISTER</Button>}
+          {!Authorization.IsLoggedIn() && button && <Button url='/sign-up-in' buttonStyle='btn--outline'>LOGIN/REGISTER</Button>}
         </div>
       </nav>
     </>

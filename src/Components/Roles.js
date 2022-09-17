@@ -1,14 +1,14 @@
-import { Link } from "react-router-dom";
+
 import { Button } from "./Button";
 
-const Roles=()=>{
+const Roles=(props)=>{
 
     return (
         <>
             <h1>Continue as </h1>
-
-            <Button url="/admin">Admin</Button>
-            <Button url="/customer">Customer</Button>
+                {props.roles.map(role=>{
+                    return <Button url={role.toLowerCase()}>{role}</Button>
+                })}
           
           
         </>

@@ -8,9 +8,10 @@ import log from './img/log.svg'
 import reg from './img/register.svg'
 import emailjs from '@emailjs/browser';
 import Navbar from '../Components/NavBar/Navbar';
+import { propTypes } from 'react-bootstrap/esm/Image';
 const LOGIN_URL = 'http://localhost:8080/api/login';
 
-const RegisterLogin = () => {
+const RegisterLogin = (props) => {
 
     const history = useHistory();
     const history1 = useHistory();
@@ -70,9 +71,13 @@ const RegisterLogin = () => {
                 console.log(res.data.user)
                 sessionStorage.setItem("jwt",res.data.jwt);
                 sessionStorage.setItem("user",JSON.stringify(res.data?res.data.user:null));
+                sessionStorage.setItem(
+                    "roles",
+                    JSON.stringify(res.data.user.roles.length!=0?res.data.user.roles:[]
+                  ));
+                  props.IsLoggedIn(true);
                 alert(res.data.user.firstName)
-                //setLoginUser(res.data.user)
-                //alert(res.data.user.roles)
+                
                 console.log(res.data)
                 console.log(res)
                 if(res.data.user.roles.length===0)

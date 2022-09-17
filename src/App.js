@@ -3,29 +3,36 @@ import './App.css';
 // import Navbar from './Components/Navbar';
 import Navbar from './Components/NavBar/Navbar';
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
-import Home from './Components/Pages/Home';
-import PolicyList from './Components/Pages/PolicyList';
+import Home from './Components/Pages/User/Home';
+import AllPolicyList from './Components/Pages/User/AllPolicyList';
 import RegisterLogin from './Components/RegisterLogin';
 // import Login from './Components/Login';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Footer from './Components/Footer';
-import Customer from './Components/Pages/Customer';
-import AddVehicle from './Components/Pages/AddVehicle';
+import Customer from './Components/Pages/Customer/Customer';
+import AddVehicle from './Components/Pages/Customer/AddVehicle';
 import Roles from './Components/Roles';
+import Authorization from './Authorization';
+import { useEffect, useState } from 'react';
 function App() {
+  const[IsLoggedIn,setLogIn]=useState(false);
+
+  useEffect(()=>
+  setLogIn(Authorization.IsLoggedIn))
 
   return (
     <>  
     <Router>
-    <Navbar/>
+    <Navbar IsLoggedIn={IsLoggedIn} setLogIn={setLogIn}/>
     <Switch>
       <Route path="/" exact component={Home}/>
       <Route path='/customer' component={Customer}/>
       <Route path='/vehicle' component={AddVehicle}/>
-      <Route path='/policies' component={PolicyList}/>
-      <Route path='/sign-up-in' component={RegisterLogin}/>
-      <Route path='/roles' component={Roles}/>
+      <Route path='/policies' component={AllPolicyList}/>
+      <Route path='/roles' render={()=><Roles roles={Authorization.getUser().roles}/>}/>
+      <Route path='/sign-up-in' render={()=><RegisterLogin IsLoggedIn={setLogIn}/>} />
+     
     </Switch>
     <Footer/>
     </Router>

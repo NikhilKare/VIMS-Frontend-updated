@@ -14,6 +14,19 @@ margin-left: 20px;
 margin-right: 20px;
 `;
 
+export const div = styled.div`
+background-color: #fff;
+border-radius: 30px;
+box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+position: relative;
+overflow: hidden;
+max-width: 80%;
+margin:5% 8%;
+height: 90vh;
+margin-bottom: 100px;
+
+`;
+
 export const SignUpContainer = styled.div`
  position: absolute;
  top: 0;
@@ -73,6 +86,42 @@ export const Button = styled.button`
    border-radius: 20px;
    border: 1px solid #ff4b2b;
    background-color: #ff4b2b;
+   color: #ffffff;
+   font-size: 12px;
+   font-weight: bold;
+   padding: 12px 45px;
+   letter-spacing: 1px;
+   text-transform: uppercase;
+   transition: transform 80ms ease-in;
+   &:active{
+       transform: scale(0.95);
+   }
+   &:focus {
+       outline: none;
+   }
+`;
+export const Add = styled.button`
+   border-radius: 20px;
+   border: 1px solid #ff4b2b;
+   background-color: #ff4b2b;
+   color: #ffffff;
+   font-size: 12px;
+   font-weight: bold;
+   padding: 12px 45px;
+   letter-spacing: 1px;
+   text-transform: uppercase;
+   transition: transform 80ms ease-in;
+   &:active{
+       transform: scale(0.95);
+   }
+   &:focus {
+       outline: none;
+   }
+`;
+export const Cancel = styled.button`
+   border-radius: 20px;
+   border: 1px solid #ff4b2b;
+   background-color: Green;
    color: #ffffff;
    font-size: 12px;
    font-weight: bold;

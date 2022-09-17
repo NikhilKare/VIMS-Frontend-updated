@@ -2,14 +2,14 @@ import React from 'react';
 import './Cards.css';
 import CardItem from './CardItem';
 import { useEffect, useState } from 'react';
-import vimsService from '../Services/VIMSService';
+import userService from '../Services/UserService';
 import car1 from '../Components/img/car-insurance.jpg';
 import electric from '../Components/img/electric_car.svg';
 import orderRide from '../Components/img/order_ride.svg';
 function Cards() {
   const [policies,setPolicies]=useState([]);
     const init = () => {
-        vimsService.getAll()
+      userService.getAll()
           .then(response => {
             console.log('Printing policy data', response.data);
             setPolicies(response.data);
