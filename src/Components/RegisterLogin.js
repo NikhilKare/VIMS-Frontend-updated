@@ -1,15 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState } from 'react'
 import "./Register.css"
 import axios from 'axios'
-// import useAuth from '../hooks/useAuth';
-import { Link, useHistory, useNavigate, useLocation } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import * as Components from './Pages/Component';
 import log from './img/log.svg'
 import reg from './img/register.svg'
-import emailjs from '@emailjs/browser';
-import Navbar from '../Components/NavBar/Navbar';
-import { propTypes } from 'react-bootstrap/esm/Image';
-const LOGIN_URL = 'http://localhost:8080/api/login';
+
 
 const RegisterLogin = (props) => {
 
@@ -73,7 +69,7 @@ const RegisterLogin = (props) => {
                 sessionStorage.setItem("user",JSON.stringify(res.data?res.data.user:null));
                 sessionStorage.setItem(
                     "roles",
-                    JSON.stringify(res.data.user.roles.length!=0?res.data.user.roles:[]
+                    JSON.stringify(res.data.user.roles.length!==0?res.data.user.roles:[]
                   ));
                   props.IsLoggedIn(true);
                 alert(res.data.user.firstName)
@@ -86,14 +82,11 @@ const RegisterLogin = (props) => {
                 if (res.data.user.roles.length===1) {
 
                     history1.push("/" + res.data.user.roles[0])
-                    
-                    //alert(res.data.user.roles[0])
                 }
                 else{
                     history.push("/roles")
                 }
             }).catch(err=>{console.log(err)})
-
     }
 
     //register
@@ -127,16 +120,6 @@ const RegisterLogin = (props) => {
     }
 
 
-    const sendEmail = (e) => {
-        e.preventDefault();
-
-        emailjs.sendForm('service_tdv9twp', 'template_ura60oa', e.target, 'UkQ9ZabRalHqMJiO')
-            .then((result) => {
-                console.log(result.text);
-            }, (error) => {
-                console.log(error.text);
-            });
-    }
     const [signIn, toggle] = React.useState(false);
     return (
         <>

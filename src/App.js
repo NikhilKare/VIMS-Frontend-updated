@@ -15,6 +15,7 @@ import AddVehicle from './Components/Pages/Customer/AddVehicle';
 import Roles from './Components/Roles';
 import Authorization from './Authorization';
 import { useEffect, useState } from 'react';
+import AddRole from './Components/Pages/User/AddRole';
 function App() {
   const[IsLoggedIn,setLogIn]=useState(false);
 
@@ -30,6 +31,7 @@ function App() {
       <Route path='/customer' component={Customer}/>
       <Route path='/vehicle' component={AddVehicle}/>
       <Route path='/policies' component={AllPolicyList}/>
+      <Route path='/addRole' component={AddRole}/>
       <Route path='/roles' render={()=><Roles roles={Authorization.getUser().roles}/>}/>
       <Route path='/sign-up-in' render={()=><RegisterLogin IsLoggedIn={setLogIn}/>} />
      

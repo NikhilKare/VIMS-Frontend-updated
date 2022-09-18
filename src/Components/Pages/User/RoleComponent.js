@@ -20,40 +20,11 @@ border-radius: 30px;
 box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 position: relative;
 overflow: hidden;
-max-width: 80%;
-margin:5% 8%;
-height: 90vh;
+max-width: 50%;
+margin:5% 35%;
+height: 50vh;
 margin-bottom: 100px;
 
-`;
-
-export const SignUpContainer = styled.div`
- position: absolute;
- top: 0;
- height: 100%;
- transition: all 0.6s ease-in-out;
- left: 0;
- width: 50%;
- opacity: 0;
- z-index: 1;
- ${props => props.signinIn !== true ? `
-   transform: translateX(100%);
-   opacity: 1;
-   z-index: 5;
- ` 
- : null}
-`;
-
-
-export const SignInContainer = styled.div`
-position: absolute;
-top: 0;
-height: 100%;
-transition: all 0.6s ease-in-out;
-left: 0;
-width: 50%;
-z-index: 2;
-${props => (props.signinIn !== true ? `transform: translateX(100%);` : null)}
 `;
 
 export const Form = styled.form`
@@ -63,7 +34,7 @@ align-items: center;
 justify-content: center;
 flex-direction: column;
 padding: 0 50px;
-height: 100%;
+height: 40vh;
 text-align: center;
 `;
 

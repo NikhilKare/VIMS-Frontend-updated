@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { Row, Table } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import CustomerService from "../../../Services/CustomerService";
 import { Button } from "../../Button";
 import Authorization from "./../../../Authorization"
@@ -31,12 +31,7 @@ function Customer() {
             console.log(err.msg)
 
         )
-
-
-
-
     }
-
     useEffect(() => {
         getAllVechiles();
         getLicenseNo();
@@ -45,33 +40,23 @@ function Customer() {
 
     return (
         <>
-            <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
-
-            <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-            <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-            {/* <!------ Include the above in your HEAD tag ----------> */}
-
             <div class="container emp-profile">
                 <form method="post">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="profile-img">
                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />
-                                <div class="file btn btn-lg btn-primary">
+                                {/* <div class="file btn btn-lg btn-primary">
                                     Change Photo
                                     <input type="file" name="file" />
-                                </div>
-                            </div>
+                                </div> */}                               
+                            </div>                           
                         </div>
                         <div class="col-md-6">
                             <div class="profile-head">
                                 <h3>
                                     {Authorization.getName()}
                                 </h3>
-                                {/* <h6>
-                                        Web Developer and Designer
-                                    </h6> */}
-
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Profile</a>
@@ -85,22 +70,9 @@ function Customer() {
                         <div class="col-md-2">
                             <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
                         </div>
+                       
                     </div>
-                    <div class="row">
-                        {/* <div class="col-md-4">
-                            <div class="profile-work">
-                                <p>WORK LINK</p>
-                                <a href="">Website Link</a><br />
-                                <a href="">Bootsnipp Profile</a><br />
-                                <a href="">Bootply Profile</a>
-                                <p>SKILLS</p>
-                                <a href="">Web Designer</a><br />
-                                <a href="">Web Developer</a><br />
-                                <a href="">WordPress</a><br />
-                                <a href="">WooCommerce</a><br />
-                                <a href="">PHP, .Net</a><br />
-                            </div>
-                        </div> */}
+                    <div class="row">       
                         <div class="col-md-8">
                             <div class="tab-content profile-tab" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -159,10 +131,8 @@ function Customer() {
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                     <div class="row">
-
                                         <table class="table">
                                             <thead>
                                                 <tr >
@@ -186,22 +156,14 @@ function Customer() {
                                                         <td>{v.vehicleNumber}</td>
                                                         <td>{v.subscriptionDate ? v.subscriptionDate : "---------"}</td>
                                                         <td>{v.expiryDate ? v.expiryDate : "----------"}</td>
-                                                        <td>{v.policy ? <button>Show Policy</button> : <button>Add Policy</button>}</td>
-                                                        <td><button>Delete</button></td>
+                                                        <td>{v.policy ? <button className="btn btn-primary mb-2">Show Policy</button> : <button className="btn btn-primary mb-2">Add Policy</button>}</td>
+                                                        <td><button className="btn btn-danger mb-2">Delete</button></td>
                                                     </tr>
 
                                                 )}
-
-                                            </tbody>
-                                            
-                                        </table>
-                                        
-                                        {/* <div class="col-md-6">
-                                                <label>Experience</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Expert</p>
-                                            </div> */}
+                                            </tbody>                                           
+                                            <Link to="/vehicle" className="btn btn-primary mb-2">Add Vehicle</Link>        
+                                        </table> 
                                     </div>
                                 </div>
                             </div>
