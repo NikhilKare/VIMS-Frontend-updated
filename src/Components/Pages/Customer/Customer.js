@@ -1,16 +1,18 @@
 
 import { useEffect, useState } from "react";
 import { Row, Table } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import CustomerService from "../../../Services/CustomerService";
+import UserService from "../../../Services/UserService";
 import { Button } from "../../Button";
 import Authorization from "./../../../Authorization"
 import "./customer.css";
 
-function Customer() {
+function Customer(props) {
+    const history=useHistory();
     const [vehicles, setVehicles] = useState([]);
     const [LicenseNo, setLicenseNo] = useState('');
-
+    const del=[];
     const getLicenseNo = () => {
         CustomerService.getLicenseNo()
             .then(res => {
@@ -35,9 +37,33 @@ function Customer() {
     useEffect(() => {
         getAllVechiles();
         getLicenseNo();
-    }, []);
+    }, vehicles);
 
+    const showPolicy=(e)=>{
+        e.preventDefault();
+        const policyId=e.target.value;
+        CustomerService.getPolicyById(policyId)
+        
+        .then(res=>{ 
+            console.log(res)
+            props.setPolicy(res.data.data)
+            history.push('/showpolicy')
+        })
+        .catch(err=>{console.log(err)})
+    }
 
+    const deleteVehicle=(e)=>{
+        e.preventDefault();
+
+        CustomerService.DeleteVechile(e.target.value)
+        .them(res=>{
+            
+            history.push('/customer')
+        })
+        .catch(err=>{
+
+        })
+    }
     return (
         <>
             <div class="container emp-profile">
@@ -46,11 +72,12 @@ function Customer() {
                         <div class="col-md-4">
                             <div class="profile-img">
                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />
-                                {/* <div class="file btn btn-lg btn-primary">
+                                                               
+                            </div>  
+                            {/* <div class="file btn btn-lg btn-primary">
                                     Change Photo
                                     <input type="file" name="file" />
-                                </div> */}                               
-                            </div>                           
+                                </div>                            */}
                         </div>
                         <div class="col-md-6">
                             <div class="profile-head">
@@ -156,8 +183,8 @@ function Customer() {
                                                         <td>{v.vehicleNumber}</td>
                                                         <td>{v.subscriptionDate ? v.subscriptionDate : "---------"}</td>
                                                         <td>{v.expiryDate ? v.expiryDate : "----------"}</td>
-                                                        <td>{v.policy ? <button className="btn btn-primary mb-2">Show Policy</button> : <button className="btn btn-primary mb-2">Add Policy</button>}</td>
-                                                        <td><button className="btn btn-danger mb-2">Delete</button></td>
+                                                        <td>{v.policy ? <button value={v.policy.policyId} onClick={showPolicy} className="btn btn-primary mb-2">Show Policy</button> : <button className="btn btn-primary mb-2">Add Policy</button>}</td>
+                                                        <td><button onClick={deleteVehicle} value={v.chasisNo} className="btn btn-danger mb-2">Delete</button></td>
                                                     </tr>
 
                                                 )}

@@ -1,7 +1,10 @@
+import { useHistory } from 'react-router-dom';
 import './policy.css'
 
-const Vehicle = (props) => {
+const Policy = (props) => {
+  
     const p = props.policy;
+    
     console.log(p);
     return (
         <>
@@ -30,11 +33,16 @@ const Vehicle = (props) => {
         <small class="d-block heading">Duration</small>
         <small class="d-block my-3">{p.duration} YEARS</small>
       </div>
-
+      {
+        props.isView?
+      <div class="text-center">
+        <a href="/customer" class="btn text-white px-5 py-3 main-btn">Back</a>
+      </div>
+      :
       <div class="text-center">
         <a href="#" class="btn text-white px-5 py-3 main-btn">BUY</a>
       </div>
-   
+      }
 
    
    
@@ -125,4 +133,4 @@ const Vehicle = (props) => {
 
 
 }
-export default Vehicle;
+export default Policy;

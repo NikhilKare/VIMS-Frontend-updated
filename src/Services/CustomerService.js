@@ -4,7 +4,10 @@ import httpClient from './http-common';
 
 // const jwt=sessionStorage.getItem("jwt");
 
-
+const getPolicyById=(id)=>{
+    const  user=JSON.parse(sessionStorage.getItem("user"));
+return httpClient.get(`/customers/${user.userId}/policy/${id}`);
+}
 
 
 const getLicenseNo=()=>{
@@ -30,5 +33,5 @@ const DeleteVechile=(vid)=>{
     return httpClient.delete(`/customers/${user.userId}/vehicles/${vid}`)
 }
 
-export default {getAllVechiles,addVehicle,getLicenseNo,subscribePolicy,DeleteVechile};
+export default {getAllVechiles,addVehicle,getLicenseNo,subscribePolicy,DeleteVechile,getPolicyById};
   
