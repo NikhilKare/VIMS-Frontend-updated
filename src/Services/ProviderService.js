@@ -5,4 +5,8 @@ const getAllProviderPolicies=()=>{
    return httpClient.get(`/provider/${Authorization.getUser().userId}/policies`)
 }
 
-export default {getAllProviderPolicies}
+const addPolicy=(policy)=>{
+   return httpClient.post(`/provider/${Authorization.getUser().userId}`,policy)
+}
+
+export default {getAllProviderPolicies,addPolicy}

@@ -79,12 +79,8 @@ const RegisterLogin = (props) => {
                 if(res.data.user.roles.length===0)
                 history.push("/addRole")
                 else
-                if (res.data.user.roles.length===1) {
-
-                    history1.push("/" + res.data.user.roles[0])
-                }
-                else{
-                    history.push("/roles")
+               {
+                    history1.push("/profile")
                 }
             }).catch(err=>{console.log(err)})
     }

@@ -99,10 +99,9 @@ function Customer(props) {
                                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Profile</a>
                                     </li>
                                     <li class="nav-item">
-                                     {Authorization.IsCustomer()?   <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">vehicles</a>
-:""}</li>
+                                     {Authorization.IsCustomer()?   <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">vehicles</a>:""}</li>
                              <li class="nav-item">
-                                     {Authorization.IsProvider()? <a class="nav-link" id="profile-tab" data-toggle="tab" href="#policy" role="tab" aria-controls="policies" aria-selected="false">Policies</a>:""}</li>
+                                     {Authorization.IsProvider()? <a class="nav-link" id="policy-tab" data-toggle="tab" href="#policy" role="tab" aria-controls="policy" aria-selected="false">Policies</a>:""}</li>
                                 </ul>
                             </div>
                         </div>
@@ -209,8 +208,9 @@ function Customer(props) {
                                         </table> 
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="policies" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="tab-pane fade" id="policy" role="tabpanel" aria-labelledby="profile-tab">
                                     <Policies />
+                                    <Link to="/addPolicy" className="btn btn-primary mb-2">Add Policy</Link>        
                                 </div>
                             </div>
                         </div>

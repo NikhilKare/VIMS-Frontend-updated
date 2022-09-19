@@ -35,7 +35,7 @@ const AddVehicle = () => {
         e.preventDefault();
         CustomerService.addVehicle(vehicle).then(res=>{
             console.log(res)
-            history.push(`/customer`,res.data.data)
+            history.push(`/profile`,res.data.data)
         }
         )
     }

@@ -21,6 +21,7 @@ import EditUser from './Components/Pages/User/EditUser';
 import CustomerNavbar from './Components/Pages/Customer/CustomerNavbar';
 import UploadImage from './Components/Pages/ImageUpload';
 import Policies from './Components/Pages/provider/Policies';
+import AddPolicy from './Components/Pages/provider/AddPolicy';
 
 function App() {
 
@@ -38,7 +39,7 @@ function App() {
     {/* <CustomerNavbar/> */}
     <Switch>
       <Route path="/" exact component={Home}/>
-      <Route path='/profile' render={()=><Customer setPolicy={setPolicy}/>}/>
+      <Route path='/profile' render={()=> {return Authorization.IsLoggedIn()?<Customer setPolicy={setPolicy}/>:<RegisterLogin IsLoggedIn={setLogIn}/>}}/>
       <Route path='/vehicle' component={AddVehicle}/>
       <Route path='/policies' component={AllPolicyList}/>
       <Route path='/addRole' component={AddRole}/>
@@ -48,7 +49,7 @@ function App() {
       <Route path="/users"component={EditUser} />
       <Route path="/uploadImg" component={UploadImage} />
       <Route path="/policy_provider" component={Policies} />
-  
+      <Route path="/addPolicy" component={AddPolicy} />
     </Switch>
     <Footer/>
     </Router>

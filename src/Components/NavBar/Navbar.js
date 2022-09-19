@@ -47,7 +47,7 @@ const logout=()=>{
               <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <NavLink to="/about">about</NavLink>
+              <NavLink to="/profile" >Profile</NavLink>
             </li>
             <li>
               <NavLink to="/policies">Policies</NavLink>

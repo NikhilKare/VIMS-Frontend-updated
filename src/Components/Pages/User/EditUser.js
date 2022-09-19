@@ -55,7 +55,7 @@ const EditUser=()=>{
                         
                         <br/>
                         <Components.Button onClick={saveUser}>Confirm</Components.Button><br/>
-                        <Components.Cancel  onClick={()=>history.push("/customer")}>Cancel</Components.Cancel>
+                        <Components.Cancel  onClick={()=>history.push("/profile")}>Cancel</Components.Cancel>
                         <br />
                         <img src={reg} alt="signin" width='500px' height='250px' />
                     </Components.Form>          
