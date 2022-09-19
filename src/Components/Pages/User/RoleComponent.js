@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+
+
 export const Container = styled.div`
 background-color: #fff;
 border-radius: 30px;
@@ -15,6 +17,18 @@ margin-right: 20px;
 `;
 
 export const div = styled.div`
+background-color: #fff;
+border-radius: 30px;
+box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+position: relative;
+overflow: hidden;
+max-width: 50%;
+margin:5% 35%;
+height: 50vh;
+margin-bottom: 100px;
+
+`;
+export const div1 = styled.div`
 background-color: #fff;
 border-radius: 30px;
 box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -61,6 +75,26 @@ export const Button = styled.button`
    font-size: 12px;
    font-weight: bold;
    padding: 12px 45px;
+   letter-spacing: 1px;
+   margin-left:30px;
+   text-transform: uppercase;
+   transition: transform 80ms ease-in;
+   &:active{
+       transform: scale(0.95);
+   }
+   &:focus {
+       outline: none;
+   }
+`;
+export const Button1 = styled.button`
+   border-radius: 20px;
+   border: 1px solid #ff4b2b;
+   background-color: #ff4b2b;
+   color: #ffffff;
+   font-size: 20px;
+   font-weight: bold;
+   padding: 12px 35px;
+   margin-top:30px;
    letter-spacing: 1px;
    margin-left:30px;
    text-transform: uppercase;

@@ -17,6 +17,8 @@ import Authorization from './Authorization';
 import { useEffect, useState } from 'react';
 import AddRole from './Components/Pages/User/AddRole';
 import Policy from './Components/Pages/Policy';
+import EditUser from './Components/Pages/User/EditUser';
+import CustomerNavbar from './Components/Pages/Customer/CustomerNavbar';
 
 function App() {
 
@@ -29,7 +31,9 @@ function App() {
   return (
     <>  
     <Router>
+    
     <Navbar IsLoggedIn={IsLoggedIn} setLogIn={setLogIn}/>
+    {/* <CustomerNavbar/> */}
     <Switch>
       <Route path="/" exact component={Home}/>
       <Route path='/customer' render={()=><Customer setPolicy={setPolicy}/>}/>
@@ -39,7 +43,7 @@ function App() {
       <Route path='/roles' render={()=><Roles roles={Authorization.getUser().roles}/>}/>
       <Route path='/sign-up-in' render={()=><RegisterLogin IsLoggedIn={setLogIn}/>} />
       <Route path='/showpolicy' render={()=><Policy policy={policy} isView={true}/>} />
-     
+      {/* <Route path={`/users/${Authorization.getUser().userId}`} component={EditUser} /> */}
     </Switch>
     <Footer/>
     </Router>

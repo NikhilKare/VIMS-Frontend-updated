@@ -2,18 +2,22 @@
 import { Button } from "./Button";
 import CardItem from './CardItem';
 import './Cards.css';
+import * as Components from './Pages/User/RoleComponent';
 const Roles=(props)=>{
 
     return (
         <>
+        <Components.div>
             <h1>Continue as </h1>
-            
-                {
+            <Components.Form>   
+            {
                 props.roles.map(role=>{
                 
                     return <Button url={role.toLowerCase()}>{role}</Button>
                 })
                 }
+            </Components.Form>
+            </Components.div>    
           
           
         </>

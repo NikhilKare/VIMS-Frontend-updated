@@ -7,7 +7,7 @@ import UserService from "../../../Services/UserService";
 import { Button } from "../../Button";
 import Authorization from "./../../../Authorization"
 import "./customer.css";
-
+import CustomerNavbar from "./CustomerNavbar";
 function Customer(props) {
     const history=useHistory();
     const [vehicles, setVehicles] = useState([]);
@@ -64,8 +64,13 @@ function Customer(props) {
 
         })
     }
+    const editProfile=(e)=>{
+        e.preventDefault();
+
+    }
     return (
         <>
+        
             <div class="container emp-profile">
                 <form method="post">
                     <div class="row">
@@ -95,7 +100,9 @@ function Customer(props) {
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
+                        <Link className="btn btn-info" to={`/users/${Authorization.getUser().userId}`}>Update Profile</Link>
+                        {/* <button  onClick={editProfile} className="btn btn-primary mb-2">Edit Profile</button> */}
+                            {/* <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" /> */}
                         </div>
                        
                     </div>
