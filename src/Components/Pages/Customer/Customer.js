@@ -5,6 +5,7 @@ import { Link, NavLink, useHistory } from "react-router-dom";
 import CustomerService from "../../../Services/CustomerService";
 import UserService from "../../../Services/UserService";
 import { Button } from "../../Button";
+import Policies from "../provider/Policies";
 import Authorization from "./../../../Authorization"
 import "./customer.css";
 import CustomerNavbar from "./CustomerNavbar";
@@ -35,8 +36,12 @@ function Customer(props) {
         )
     }
     useEffect(() => {
-        getAllVechiles();
-        getLicenseNo();
+        if(Authorization.IsCustomer()){
+            getAllVechiles();
+            getLicenseNo();
+        }
+      
+       
     }, vehicles);
 
     const showPolicy=(e)=>{
@@ -76,13 +81,13 @@ function Customer(props) {
                     <div class="row">
                         <div class="col-md-4">
                             <div class="profile-img">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />
+                                <img src={`http://localhost:8080/api/users/${Authorization.getUser().userId}/image`}alt="" />
                                                                
                             </div>  
-                            {/* <div class="file btn btn-lg btn-primary">
+                            <Link to={"/uploadImg"} class="file btn btn-lg btn-primary">
                                     Change Photo
-                                    <input type="file" name="file" />
-                                </div>                            */}
+                                    {/* <input type="file" name="file" /> */}
+                                </Link>                           
                         </div>
                         <div class="col-md-6">
                             <div class="profile-head">
@@ -94,13 +99,15 @@ function Customer(props) {
                                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Profile</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">vehicles</a>
-                                    </li>
+                                     {Authorization.IsCustomer()?   <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">vehicles</a>
+:""}</li>
+                             <li class="nav-item">
+                                     {Authorization.IsProvider()? <a class="nav-link" id="profile-tab" data-toggle="tab" href="#policy" role="tab" aria-controls="policies" aria-selected="false">Policies</a>:""}</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-md-2">
-                        <Link className="btn btn-info" to={`/users/${Authorization.getUser().userId}`}>Update Profile</Link>
+                        <Link className="btn btn-info" to={`/users`}>Update Profile</Link>
                         {/* <button  onClick={editProfile} className="btn btn-primary mb-2">Edit Profile</button> */}
                             {/* <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" /> */}
                         </div>
@@ -142,6 +149,7 @@ function Customer(props) {
                                             <p>{Authorization.getUser().contactNumber}</p>
                                         </div>
                                     </div>
+                                    {LicenseNo==""?"":
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>License No</label>
@@ -149,7 +157,7 @@ function Customer(props) {
                                         <div class="col-md-6">
                                             <p>{LicenseNo}</p>
                                         </div>
-                                    </div>
+                                    </div>}
 
                                     <div class="row">
                                         <div class="col-md-6">
@@ -168,17 +176,18 @@ function Customer(props) {
                                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                     <div class="row">
                                         <table class="table">
-                                            <thead>
-                                                <tr >
-                                                    <th scope="col">Chasis No</th>
-                                                    <th scope="col">Registration Date</th>
-                                                    <th scope="col">vehicleType</th>
-                                                    <th scope="col">vehicleNumber</th>
-                                                    <th scope="col">subscriptionDate</th>
-                                                    <th scope="col">expiryDate</th>
-                                                    <th scope="col">Policy Name</th>
-                                                    <th scope="col"></th>
-                                                </tr>
+                                            <thead>{vehicles.length===0?"":
+                                             <tr >
+                                             <th scope="col">Chasis No</th>
+                                             <th scope="col">Registration Date</th>
+                                             <th scope="col">vehicleType</th>
+                                             <th scope="col">vehicleNumber</th>
+                                             <th scope="col">subscriptionDate</th>
+                                             <th scope="col">expiryDate</th>
+                                             <th scope="col">Policy Name</th>
+                                             <th scope="col"></th>
+                                         </tr>}
+                                               
                                             </thead>
                                             <tbody>
                                                 {vehicles.map(v =>
@@ -199,6 +208,9 @@ function Customer(props) {
                                             <Link to="/vehicle" className="btn btn-primary mb-2">Add Vehicle</Link>        
                                         </table> 
                                     </div>
+                                </div>
+                                <div class="tab-pane fade" id="policies" role="tabpanel" aria-labelledby="profile-tab">
+                                    <Policies />
                                 </div>
                             </div>
                         </div>

@@ -19,6 +19,8 @@ import AddRole from './Components/Pages/User/AddRole';
 import Policy from './Components/Pages/Policy';
 import EditUser from './Components/Pages/User/EditUser';
 import CustomerNavbar from './Components/Pages/Customer/CustomerNavbar';
+import UploadImage from './Components/Pages/ImageUpload';
+import Policies from './Components/Pages/provider/Policies';
 
 function App() {
 
@@ -36,14 +38,17 @@ function App() {
     {/* <CustomerNavbar/> */}
     <Switch>
       <Route path="/" exact component={Home}/>
-      <Route path='/customer' render={()=><Customer setPolicy={setPolicy}/>}/>
+      <Route path='/profile' render={()=><Customer setPolicy={setPolicy}/>}/>
       <Route path='/vehicle' component={AddVehicle}/>
       <Route path='/policies' component={AllPolicyList}/>
       <Route path='/addRole' component={AddRole}/>
       <Route path='/roles' render={()=><Roles roles={Authorization.getUser().roles}/>}/>
       <Route path='/sign-up-in' render={()=><RegisterLogin IsLoggedIn={setLogIn}/>} />
       <Route path='/showpolicy' render={()=><Policy policy={policy} isView={true}/>} />
-      {/* <Route path={`/users/${Authorization.getUser().userId}`} component={EditUser} /> */}
+      <Route path="/users"component={EditUser} />
+      <Route path="/uploadImg" component={UploadImage} />
+      <Route path="/policy_provider" component={Policies} />
+  
     </Switch>
     <Footer/>
     </Router>

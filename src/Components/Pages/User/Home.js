@@ -10,9 +10,7 @@ function Home (){
         <>
         <HeroSection/>
         <TestiMonials/>
-        <Cards/>
-        <UploadImage/>
-        
+        <Cards/>        
         </>
     )
 }

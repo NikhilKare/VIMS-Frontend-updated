@@ -13,7 +13,7 @@ const Roles=(props)=>{
             {
                 props.roles.map(role=>{
                 
-                    return <Button url={role.toLowerCase()}>{role}</Button>
+                    return <Button url="/profile">{role}</Button>
                 })
                 }
             </Components.Form>

@@ -63,6 +63,13 @@ const logout=()=>{
               {props.IsLoggedIn?"Logout":`LOGIN/REGISTER`}
               </NavLink>
             </li>
+           
+           
+            </div>
+            <div >
+            <li>
+                {Authorization.IsLoggedIn()?<RoleNavbar />:""}
+            </li>
             </div>
           </ul>
         </div>
@@ -95,7 +102,7 @@ const logout=()=>{
             <a href="#" onClick={() => setShowMediaIcons(!showMediaIcons)}>
               <GiHamburgerMenu />
             </a>
-            <RoleNavbar isLoggedIn={Authorization.IsCustomer} />
+           
           </div>
         </div>
       </nav>

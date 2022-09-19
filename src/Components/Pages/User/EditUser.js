@@ -27,9 +27,11 @@ const EditUser=()=>{
       }, []);
       const saveUser= async e=>{
         e.preventDefault();
-        await axios.put(`http://localhost:8080/api/users/${Authorization.getUser().userId}`,user)
+        await axios.put(`http://localhost:8080/api/users`,user)
         .then(res=>{
             alert("User Data Updated Successfuly")
+            sessionStorage.setItem('user',JSON.stringify(user));
+            history.push("/customer")
         })
         .catch(err=>{
             alert ("Something went Wrong")
@@ -37,7 +39,8 @@ const EditUser=()=>{
       }
     const loadUser = async () => {
         const result = await axios.get(`http://localhost:8080/api/users/${Authorization.getUser().userId}`);
-        setuser(result.data);
+        setuser(result.data.data);
+        console.log(result.data.data)
       };
       return (
         <Components.div>               

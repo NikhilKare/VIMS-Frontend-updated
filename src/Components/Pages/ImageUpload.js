@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
-
+import Authorization from "../../Authorization";
 
 const UploadImage=()=>{
     const [imageFile, setImageFile] = useState();
@@ -20,12 +20,12 @@ const UploadImage=()=>{
         formData.append('imageFile',imageFile)  //1st argumet 'imageFile' name must be matches with spring-boot requeat param name MultipartFile imageFile
         console.log(imageFile);
         console.log(formData);
-        axios.post(`http://localhost:8080/users/1/image`,formData,
+        axios.post(`http://localhost:8080/api/users/${Authorization.getUser().userId}/image`,formData,
         {headers:{'Content-type':'multipart/form-data;boundary=<calculated when request is sent>'}})
         .then(res=>history.push("/"))
         .catch(err=>alert("error"));
     }
-    const showImage=()=>{axios.get(`http://localhost:8080/users/1/image`)
+    const showImage=()=>{axios.get(`http://localhost:8080/api/users/${Authorization.getUser().userId}/image`)
     .then(res=>{setImageFile(res.data);
         console.log(res.data);
         setImgflag(true)})}
@@ -37,7 +37,7 @@ const UploadImage=()=>{
              onClick={handleSubmission}
              className='btn btn-primary' 
              style={{'margin':'100px'}}>Upload</button><br/>
-           {imgFlag ?  <img src={URL.createObjectURL(imageFile)} style={{'height':'400px','width':'400px'}}></img> : <img src={`http://localhost:8080/users/1/image`} style={{'height':'400px','width':'400px'}}></img>}
+           {imgFlag ?  <img src={URL.createObjectURL(imageFile)} style={{'height':'400px','width':'400px'}}></img> : <img src={`http://localhost:8080/api/users/${Authorization.getUser().userId}/image`} style={{'height':'400px','width':'400px'}}></img>}
             <br/><br/><Link to={`/`}><button className="btn btn-primary">Back</button></Link>
         </div>
     )
