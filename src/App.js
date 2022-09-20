@@ -21,6 +21,9 @@ import EditUser from './Components/Pages/User/EditUser';
 import UploadImage from './Components/Pages/ImageUpload';
 import Policies from './Components/Pages/provider/Policies';
 import AddPolicy from './Components/Pages/provider/AddPolicy';
+import EditPolicy from './Components/Pages/provider/EditPolicy';
+import AdminNavbar from './Components/NavBar/AdminNavbar';
+import Admin from './Components/Pages/Admin/Admin';
 
 function App() {
 
@@ -32,7 +35,7 @@ function App() {
     <>  
     <Router>
     
-    <Navbar />
+    {Authorization.IsAdmin()?<AdminNavbar/>:<Navbar/>}
     {/* <CustomerNavbar/> */}
     <Switch>
       <Route path="/" exact component={Home}/>
@@ -47,6 +50,9 @@ function App() {
       <Route path="/uploadImg" component={UploadImage} />
       <Route path="/policy_provider" component={Policies} />
       <Route path="/addPolicy" component={AddPolicy} />
+      <Route path="/updatepolicy"component={EditPolicy} />
+      <Route path="/providers"component={Admin} />
+      {/* <Route path="/contact"component={Contact} /> */}
     </Switch>
     <Footer/>
     </Router>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import {  useSelector } from 'react-redux';
-import { NavLink, useHistory } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
+import Authorization from '../../Authorization';
 import CustomerService from '../../Services/CustomerService';
 import ProviderService from '../../Services/ProviderService';
 import './policy.css'
@@ -41,6 +42,11 @@ const Policy = (props) => {
       e.preventDefault();
       props.delete(e.target.value)
     }
+    const updatePolicy=(e)=>{
+      e.preventDefault();
+      sessionStorage.setItem("policyId",e.target.value);
+      history.push("/updatepolicy")
+    }
     return (
         <>
 
@@ -75,8 +81,18 @@ const Policy = (props) => {
       </div>
       :
       <div class="text-center">
-        <button onClick={buyPolicy} value={p.policyId} class="btn text-white px-5 py-3 main-btn">BUY</button> &nbsp;&nbsp;
-        <button onClick={deletePolicy} value={p.policyId} class="btn text-white px-5 py-3 main-btn">Delete</button>
+        {
+         Authorization.IsCustomer()?<button onClick={buyPolicy} value={p.policyId} class="btn text-white px-5 py-3 main-btn">BUY</button>:"" 
+        }
+        &nbsp;&nbsp;
+        {
+           props.delete?<button onClick={deletePolicy} value={p.policyId} class="btn text-white px-5 py-3 main-btn">Delete</button>:""
+        }
+        &nbsp;&nbsp;
+        {
+          props.delete?<button onClick={updatePolicy} value={p.policyId} class="btn text-white px-5 py-3 main-btn">Update</button>:""
+        }
+        
       </div>
       }
 

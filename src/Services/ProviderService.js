@@ -13,4 +13,8 @@ const deletePolicy=(id)=>{
    return httpClient.delete(`/provider/${Authorization.getUser().userId}/policies/${id}`)
 }
 
-export default {getAllProviderPolicies,addPolicy,deletePolicy}
+const updatePolicy=(id)=>{
+   return httpClient.put(`/provider/${id}`)
+}
+
+export default {getAllProviderPolicies,addPolicy,deletePolicy,updatePolicy}

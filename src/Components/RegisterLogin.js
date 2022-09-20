@@ -6,6 +6,7 @@ import * as Components from './Pages/Component';
 import log from './img/log.svg'
 import reg from './img/register.svg'
 import { useDispatch } from 'react-redux';
+import Authorization from '../Authorization';
 
 
 const RegisterLogin = (props) => {
@@ -27,39 +28,6 @@ const RegisterLogin = (props) => {
         })
     }
 
-//     axios.put(${IP_ADDRS}/api/doctor/appointment/update_status, obj, { headers: { "Authorization": Bearer ${doctor.jwt} } })
-//     .then(res => { swal("All Recors Updated","","success");
-//     navigate(/doctor) })
-//     .catch(err => { swal("Something went Wrong","","error") });
-
-
-
-// })
-// .catch(err => { swal("Something Went Wrong", "", "error") });
-
-    // useEffect(()=>{
-    //     let jwt=sessionStorage.getItem("jwt")
-    //     console.log(jwt);
-    // },[])
-    // const getData=()=>{
-    //     let jwt= sessionStorage.getItem("jwt")
-    //     axios.get("http://localhost:8080/api/home/policies",{ headers: { "Authorization": `Bearer ${jwt}`} }).then(res => {console.log(res.data)
-    //     sessionStorage.setItem("jwt",res.data.jwt)
-    // })
-    // .catch(err => console.log(err));
-    // }
-    // const userLogin = () => {
-    //     let obj = {
-    //         "email": "nik@gmail.com",
-    //         "password": "1234"
-    //     }
-    //     axios.post("http://localhost:8080/api/home/login", user1)
-    //     .then(res => {console.log(res.data)
-    //         sessionStorage.setItem("jwt",res.data.jwt)
-    //     })
-    //     .catch(err => console.log(err));
-    // }
-
     //SENDING AXIOS REQUEST
     const login = async (e) => {
         e.preventDefault();
@@ -68,8 +36,9 @@ const RegisterLogin = (props) => {
                 console.log(res.data.user)
                 sessionStorage.setItem("jwt",res.data.jwt);
                 sessionStorage.setItem("user",JSON.stringify(res.data?res.data.user:null));
-                sessionStorage.setItem("email", res.email);
-                sessionStorage.setItem("uname", res.name);
+                // sessionStorage.setItem("email", res.email);
+                // sessionStorage.setItem("uname", res.name);
+                
                 sessionStorage.setItem("id", res.id);
                 sessionStorage.setItem(
                     "roles",
@@ -80,10 +49,10 @@ const RegisterLogin = (props) => {
                  
                 alert(res.data.user.firstName)
                 console.log(res)
-                if(res.data.user.roles.length===0)
-                    history.push("/addRole")
+                if(res.data.user.roles.includes("ADMIN"))
+                    history.push("/admin")
                 else
-               {
+                {
                     history1.push("/profile")
                 }
             }).catch(err=>{console.log(err)})

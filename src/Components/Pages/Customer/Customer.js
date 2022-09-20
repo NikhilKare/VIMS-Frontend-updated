@@ -8,6 +8,7 @@ import RegisterLogin from "../../RegisterLogin";
 import PolicyList from "../PolicyList";
 import Authorization from "./../../../Authorization"
 import "./customer.css";
+import profile from '../../../Components/img/profile.png'
 function Customer(props) {
     const history = useHistory();
     const [vehicles, setVehicles] = useState([]);
@@ -27,7 +28,8 @@ function Customer(props) {
       }   
     useEffect(() => {
       console.log("in use")
-      ProviderService.getAllProviderPolicies()
+      if(Authorization.IsLoggedIn())
+        ProviderService.getAllProviderPolicies()
         .then(response => {
           
           console.log('Printing policy data', response.data);
@@ -130,13 +132,10 @@ function Customer(props) {
                     <div class="row">
                         <div class="col-md-4">
                             <div class="profile-img" col-md-4>
-                                <img src={`http://localhost:8080/api/users/${Authorization.getUser().userId}/image`} alt="" />
+                                <img className="profile-img" src={`http://localhost:8080/api/users/${Authorization.getUser().userId}/image`} alt="" onError={(e)=>{e.target.onerror = null; e.target.src=profile}}/>
 
                             </div>
-                            <Link to={"/uploadImg"} class="file btn btn-lg btn-primary">
-                                Change Photo
-                                {/* <input type="file" name="file" /> */}
-                            </Link>
+                           
                         </div>
                         <div className="col-md-6">
                             <div className="profile-head">
@@ -156,8 +155,9 @@ function Customer(props) {
                         </div>
                         <div className="col-md-2">
                             <Link className="btn btn-info" to={`/users`}>Update Profile</Link>
-                            {/* <button  onClick={editProfile} className="btn btn-primary mb-2">Edit Profile</button> */}
-                            {/* <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" /> */}
+                            <Link to={"/uploadImg"} class="file btn btn-lg btn-primary">
+                                Change Photo
+                            </Link>
                         </div>
 
                     </div>
@@ -190,13 +190,35 @@ function Customer(props) {
                                         </div>
                                     </div>
                                     <div className="row">
-                                        <div claclassNamess="col-md-6">
+                                        <div className="col-md-6">
                                             <label>Phone</label>
                                         </div>
                                         <div className="col-md-6">
                                             <p>{Authorization.getUser().contactNumber}</p>
                                         </div>
                                     </div>
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <label>Account</label>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <p>{Authorization.getUser().status}</p>
+                                        </div>
+                                    </div>
+                                    {
+                                        Authorization.IsProvider()
+                                        ?
+                                        <div className="row">
+                                        <div className="col-md-6">
+                                            <label>Provider Status</label>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <p>{Authorization.getUser().status}</p>
+                                        </div>
+                                        </div>
+                                        :""
+                                    }
+                                    
                                     {LicenseNo === "" ? "" :
                                         <div className="row">
                                             <div className="col-md-6">
@@ -231,11 +253,11 @@ function Customer(props) {
                                                 <tr >
                                                     <th scope="col">Chasis No</th>
                                                     <th scope="col">Registration Date</th>
-                                                    <th scope="col">vehicleType</th>
-                                                    <th scope="col">vehicleNumber</th>
-                                                    <th scope="col">subscriptionDate</th>
+                                                    <th scope="col">vehicle Type</th>
+                                                    <th scope="col">vehicle Number</th>
+                                                    <th scope="col">subscription Date</th>
                                                     <th scope="col">expiryDate</th>
-                                                    <th scope="col">Policy Name</th>
+                                                    <th scope="col"></th>
                                                     <th scope="col"></th>
                                                 </tr>}
 
@@ -253,13 +275,10 @@ function Customer(props) {
                                                         <td>{v.policy ? <button value={v.policy.policyId} onClick={showPolicy} className="btn btn-primary mb-2">Show Policy</button> : <button onClick={addPolicy} value={v.chasisNo} className="btn btn-primary mb-2">Add Policy</button>}</td>
                                                         <td><button onClick={deleteVehicle} value={v.chasisNo} className="btn btn-danger mb-2">Delete</button></td>
                                                     </tr>
-
                                                 )}
                                             </tbody>
                                             <Link to="/vehicle" className="btn btn-primary mb-2">Add Vehicle</Link>
                                         </table>
-
-                                    
                                 </div>
                                 </div>
                                 <div className="tab-pane fade" id="policy" role="tabpanel" aria-labelledby="profile-tab">
