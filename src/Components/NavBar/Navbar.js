@@ -1,8 +1,8 @@
-import React, { useState,useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./navbar.css";
-import { Button } from './Button';
 import "./Button.css";
+
 
 import { Link, useHistory } from 'react-router-dom';
 import {
@@ -16,13 +16,15 @@ import { NavLink } from "react-router-dom";
 import Authorization from "../../Authorization";
 import RoleNavbar from "./RoleNavbar";
 const { Fragment } = require("react");
-const Navbar = (props) => {
+const Navbar = () => {
+  const dispatch=useDispatch();
   const state = useSelector((state) => state);
   const history=useHistory();
   const [showMediaIcons, setShowMediaIcons] = useState(false);
 const logout=()=>{
+  dispatch({type:"LogOut"});
   sessionStorage.clear();
-  props.setLogIn(false);
+  
   history.push("/");
 }
   return (
@@ -56,19 +58,15 @@ const logout=()=>{
               <NavLink to="/contact">contact</NavLink>
             </li>
             <div className="login">
-            <li onClick={props.IsLoggedIn?logout:""}>
-            <NavLink to={props.IsLoggedIn?"":"/sign-up-in"}>
-              
-              {/* {props.Authorization.getName()} */}
-              {props.IsLoggedIn?"Logout":`LOGIN/REGISTER`}
+            <li onClick={state.loggedin.IsLoggedIn?logout:""}>
+            <NavLink to={state.loggedin.IsLoggedIn?"":"/sign-up-in"}>
+              {state.loggedin.IsLoggedIn?"Logout":`LOGIN/REGISTER`}
               </NavLink>
-            </li>
-           
-           
+            </li>           
             </div>
-            <div >
+            <div>
             <li>
-                {Authorization.IsLoggedIn()?<RoleNavbar />:""}
+                <RoleNavbar />
             </li>
             </div>
           </ul>

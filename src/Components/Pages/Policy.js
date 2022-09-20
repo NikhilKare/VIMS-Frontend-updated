@@ -1,11 +1,46 @@
-import { useHistory } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import {  useSelector } from 'react-redux';
+import { NavLink, useHistory } from 'react-router-dom';
+import CustomerService from '../../Services/CustomerService';
+import ProviderService from '../../Services/ProviderService';
 import './policy.css'
 
+
 const Policy = (props) => {
-  
+ 
+  const state=useSelector(state=>state);
+// useEffect(()=>{
+
+// },arr)
+    console.log(props)
     const p = props.policy;
-    
-    console.log(p);
+    const history=useHistory();
+    const buyPolicy=(e)=>{
+      e.preventDefault();
+        //console.log(e.target.value)
+        //console.log(state.policy)
+        console.log(sessionStorage.getItem("chasisNo"))
+        if(sessionStorage.getItem("chasisNo")==null){
+          sessionStorage.setItem("policyId",e.target.value);
+          alert("choose Vehicle")
+          history.push("/profile")
+        }
+          else
+          {
+            CustomerService.subscribePolicy(sessionStorage.getItem("chasisNo"),e.target.value).then(res=>{
+              console.log(res.data)
+              sessionStorage.removeItem("policyId");
+                sessionStorage.removeItem("chasisNo");
+              alert(res.data.data);
+              history.push("/");
+            }).catch(err=>console.log(err))
+          }
+    }
+
+    const deletePolicy=(e)=>{
+      e.preventDefault();
+      props.delete(e.target.value)
+    }
     return (
         <>
 
@@ -36,11 +71,12 @@ const Policy = (props) => {
       {
         props.isView?
       <div class="text-center">
-        <a href="/customer" class="btn text-white px-5 py-3 main-btn">Back</a>
+        <NavLink to="/profile" class="btn text-white px-5 py-3 main-btn">Back</NavLink>
       </div>
       :
       <div class="text-center">
-        <a href="#" class="btn text-white px-5 py-3 main-btn">BUY</a>
+        <button onClick={buyPolicy} value={p.policyId} class="btn text-white px-5 py-3 main-btn">BUY</button> &nbsp;&nbsp;
+        <button onClick={deletePolicy} value={p.policyId} class="btn text-white px-5 py-3 main-btn">Delete</button>
       </div>
       }
 

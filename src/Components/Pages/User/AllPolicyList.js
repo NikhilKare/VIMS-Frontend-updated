@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
 import userService from '../../../Services/UserService';
 import PolicyList from "./../PolicyList"
 import './allpolicylist.css'
 function AllPolicyList(){
     const [policies,setPolicies]=useState([]);
-    const init = () => {
+    
+        
+    
+    
+      useEffect(() => {
         userService.getAll()
           .then(response => {
             console.log('Printing policy data', response.data);
@@ -14,10 +17,6 @@ function AllPolicyList(){
           .catch(error => {
             console.log('Something went wrong', error);
           }) 
-      }
-    
-      useEffect(() => {
-        init();
       }, []);
       return (
       <>

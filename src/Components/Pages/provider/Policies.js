@@ -1,26 +1,25 @@
 import { useEffect, useState } from 'react';
-import { Provider } from 'react-redux';
-import { Link, NavLink } from 'react-router-dom';
+
 import ProviderService from '../../../Services/ProviderService';
-import userService from '../../../Services/UserService';
+
 import PolicyList from "./../PolicyList"
 import './allpolicylist.css'
 function Policies(){
     const [policies,setPolicies]=useState([]);
-    const init = () => {
+    
+    
+      useEffect(() => {
+        console.log("in use")
         ProviderService.getAllProviderPolicies()
           .then(response => {
+            
             console.log('Printing policy data', response.data);
             setPolicies(response.data.data);
           })
           .catch(error => {
             console.log('Something went wrong', error);
           }) 
-      }
-    
-      useEffect(() => {
-        init();
-      }, []);
+      },[]);
       return (
       <>
       

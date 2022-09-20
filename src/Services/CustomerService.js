@@ -1,5 +1,5 @@
 
-import { useEffect } from 'react';
+import Authorization from '../Authorization';
 import httpClient from './http-common';
 
 // const jwt=sessionStorage.getItem("jwt");
@@ -26,12 +26,12 @@ const addVehicle=(vehicle)=>{
 }
 const subscribePolicy=(vid,policyId)=>{
     const user=JSON.parse(sessionStorage.getItem("user"));
-    return httpClient.get(`/customers/${user.userId}/vehicles/${vid}addPolicy?policyId=${policyId}`)
+    return httpClient.get(`/customers/${user.userId}/vehicles/${vid}/addPolicy?policyId=${policyId}`)
 }
-const DeleteVechile=(vid)=>{
-    const user=JSON.parse(sessionStorage.getItem("user"));
+const deleteVechile=(vid)=>{
+    const user=Authorization.getUser();
     return httpClient.delete(`/customers/${user.userId}/vehicles/${vid}`)
 }
 
-export default {getAllVechiles,addVehicle,getLicenseNo,subscribePolicy,DeleteVechile,getPolicyById};
+export default {getAllVechiles,addVehicle,getLicenseNo,subscribePolicy,deleteVechile,getPolicyById};
   

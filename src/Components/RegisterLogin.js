@@ -5,13 +5,14 @@ import { useHistory } from 'react-router-dom'
 import * as Components from './Pages/Component';
 import log from './img/log.svg'
 import reg from './img/register.svg'
+import { useDispatch } from 'react-redux';
 
 
 const RegisterLogin = (props) => {
 
     const history = useHistory();
     const history1 = useHistory();
-
+    const dispatch=useDispatch();
     const [user1, setUser1] = useState({
         email: "",
         password: ""
@@ -67,17 +68,20 @@ const RegisterLogin = (props) => {
                 console.log(res.data.user)
                 sessionStorage.setItem("jwt",res.data.jwt);
                 sessionStorage.setItem("user",JSON.stringify(res.data?res.data.user:null));
+                sessionStorage.setItem("email", res.email);
+                sessionStorage.setItem("uname", res.name);
+                sessionStorage.setItem("id", res.id);
                 sessionStorage.setItem(
                     "roles",
                     JSON.stringify(res.data.user.roles.length!==0?res.data.user.roles:[]
                   ));
-                  props.IsLoggedIn(true);
+
+                  dispatch({type:"IsLoggedIn"});
+                 
                 alert(res.data.user.firstName)
-                
-                console.log(res.data)
                 console.log(res)
                 if(res.data.user.roles.length===0)
-                history.push("/addRole")
+                    history.push("/addRole")
                 else
                {
                     history1.push("/profile")

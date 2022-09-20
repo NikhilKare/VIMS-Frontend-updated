@@ -9,4 +9,8 @@ const addPolicy=(policy)=>{
    return httpClient.post(`/provider/${Authorization.getUser().userId}`,policy)
 }
 
-export default {getAllProviderPolicies,addPolicy}
+const deletePolicy=(id)=>{
+   return httpClient.delete(`/provider/${Authorization.getUser().userId}/policies/${id}`)
+}
+
+export default {getAllProviderPolicies,addPolicy,deletePolicy}

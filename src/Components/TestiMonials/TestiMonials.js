@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+
 import TestiMonialsDetails from '../TestiMonialsDetails/TestiMonialsDetails'
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
-import userPic from '../../Components/img/user-one.png';
+
 import India from '../../Components/img/India.png'
 import fraud from '../../Components/img/fraud.jpg'
 import verified from '../../Components/img/verified.jpg'

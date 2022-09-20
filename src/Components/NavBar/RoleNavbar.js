@@ -6,79 +6,37 @@ import CustomerNavbar from "../Pages/Customer/CustomerNavbar";
 import Authorization from "../../Authorization";
 import { Dropdown } from "react-bootstrap";
 
-function RoleNavbar({isLoggedIn}) {
+function RoleNavbar() {
     const state = useSelector((state) => state);
-    const history = useHistory();
-    const dispatch = useDispatch();
     console.log(Authorization.IsCustomer());
-    // console.log(isLoggedIn())
-     if (Authorization.IsCustomer()) {
+    if (state.loggedin.IsLoggedIn) {
       return (
         <>
-
-        {/* <div >
-          <select ><option>
-              -Continue as-
-            </option>
-            <option>
-              ADMIN
-            </option>
-            <option>
-              POLICY_PROVIDER
-            </option>
-            <option>
-              <Link to="">
-              CUSTOMER  
-              </Link>
-            
-            </option>
-          </select>
-          
-        </div> */}
-
 <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Continue As
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
   {
-    Authorization.IsAdmin()? <Link className="dropdown-item" to="/admin">ADMIN</Link>:""
+    Authorization.IsAdmin()?<Link className="dropdown-item" to="/profile">ADMIN</Link>:""
   }
   {
-    Authorization.IsProvider()? <Link className="dropdown-item" to="/customer">POLICY PROVIDER</Link>:""
-     }
-     {
-    Authorization.IsCustomer()?<Link className="dropdown-item" to="/customer">CUSTOMER</Link>:""
+    Authorization.IsProvider()?<Link className="dropdown-item" to="/profile">POLICY PROVIDER</Link>:""
   }
-   <Link className="dropdown-item" to="/addrole">+ Add Role</Link>
+  {
+    Authorization.IsCustomer()?
+    <Link className="dropdown-item" to="/profile">CUSTOMER</Link>:""
+  }
+  {
+    <Link className="dropdown-item" to="/addrole">+ Add Role</Link>
+  }
+   
     
   </div>
 </div>
-            {/* <a
-              
-              href="#"
-              id="navbarDropdownMenuLink"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-             ______
-            </a>
-            <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <Link className="dropdown-item" to="/alogin">
-                ADMIN
-              </Link>
-              <Link className="dropdown-item" to="/slogin">
-                POLICY_PROVIDER
-              </Link>
-              <Link className="dropdown-item" to="/clogin">
-                CUSTOMER
-              </Link>
-            </div> */}
         </>
       );
-     }
+    }
     
 }
 

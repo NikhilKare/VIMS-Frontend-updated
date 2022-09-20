@@ -44,7 +44,7 @@ function AddRole(){
             user.roles.push(role.roles);
             console.log(user);
             sessionStorage.setItem("user",JSON.stringify(user));
-            history.push(`/roles`,res.data.data)
+            history.push(`/profile`,res.data.data)
         })
         .catch(err=>{
             console.log(err)

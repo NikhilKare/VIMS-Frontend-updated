@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
-import { useHistory, useParams,Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Authorization from "./../../../Authorization"
-import UserService from "../../../Services/UserService";
 import reg from './../../img/register.svg'
 import * as Components from './../Component';
 
@@ -31,7 +30,7 @@ const EditUser=()=>{
         .then(res=>{
             alert("User Data Updated Successfuly")
             sessionStorage.setItem('user',JSON.stringify(user));
-            history.push("/customer")
+            history.push("/profile")
         })
         .catch(err=>{
             alert ("Something went Wrong")

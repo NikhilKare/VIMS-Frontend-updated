@@ -1,7 +1,7 @@
 const initialState={
     IsLoggedIn:sessionStorage.getItem("email")!==null,
     Username: sessionStorage.getItem("uname")===null ?"":sessionStorage.getItem("uname"),
-    Role: sessionStorage.getItem("role")===null ? "":sessionStorage.getItem("role")
+    Roles: sessionStorage.getItem("roles")===null ? "":sessionStorage.getItem("roles")
 }
 
 const reducer=(state=initialState,action)=>{
@@ -11,11 +11,11 @@ const reducer=(state=initialState,action)=>{
             return {...state,
                 IsLoggedIn:true,
                 Username:sessionStorage.getItem("uname"),
-                Role:sessionStorage.getItem("role")
+                Roles:sessionStorage.getItem("roles")
             } 
         case 'LogOut':
             sessionStorage.clear()
-            return {...state,IsLoggedIn:false,Username:'',Role:''}
+            return {...state,IsLoggedIn:false,Username:'',Roles:[]}
         default:
             return state
     }
