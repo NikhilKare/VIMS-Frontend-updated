@@ -3,6 +3,7 @@ import {  useSelector } from 'react-redux';
 import { Link, NavLink, useHistory, useLocation } from 'react-router-dom';
 import Authorization from '../../../Authorization';
 import AdminService from '../../../Services/AdminService';
+import ProviderService from '../../../Services/ProviderService';
 
 
 import './policy.css'
@@ -15,11 +16,6 @@ const Provider = (props) => {
   const history=useHistory();
     console.log(props)
     const p = props.provider;
-    
-
-    // useEffect(()=>{
-
-    // },[relode])
 
     const approve=(e)=>{
       e.preventDefault();
@@ -55,6 +51,7 @@ const Provider = (props) => {
         console.log(err)
       })
     }
+
     return (
         <>
 

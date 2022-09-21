@@ -24,6 +24,9 @@ import AddPolicy from './Components/Pages/provider/AddPolicy';
 import EditPolicy from './Components/Pages/provider/EditPolicy';
 import AdminNavbar from './Components/NavBar/AdminNavbar';
 import Admin from './Components/Pages/Admin/Admin';
+import Contact from './Components/Test/Contact';
+import { Payment } from './Components/Pages/Customer/Payment';
+
 
 function App() {
 
@@ -52,7 +55,8 @@ function App() {
       <Route path="/addPolicy" component={AddPolicy} />
       <Route path="/updatepolicy"component={EditPolicy} />
       <Route path="/providers"component={Admin} />
-      {/* <Route path="/contact"component={Contact} /> */}
+      <Route path="/payment"component={Payment} />
+      
     </Switch>
     <Footer/>
     </Router>

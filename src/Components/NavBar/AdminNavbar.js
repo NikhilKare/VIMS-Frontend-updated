@@ -57,9 +57,9 @@ const logout=()=>{
               <NavLink to="/contact">contact</NavLink>
             </li>
             <div className="login">
-            <li onClick={state.loggedin.IsLoggedIn?logout:""}>
-            <NavLink to={state.loggedin.IsLoggedIn?"":"/sign-up-in"}>
-              {state.loggedin.IsLoggedIn?"Logout":`LOGIN/REGISTER`}
+            <li onClick={Authorization.IsLoggedIn()?logout:""}>
+            <NavLink to={Authorization.IsLoggedIn()?"":"/sign-up-in"}>
+              {Authorization.IsLoggedIn()?"Logout":`LOGIN/REGISTER`}
               </NavLink>
             </li>           
             </div>

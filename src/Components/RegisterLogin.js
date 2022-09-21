@@ -33,6 +33,10 @@ const RegisterLogin = (props) => {
         e.preventDefault();
         axios.post("http://localhost:8080/api/login", user1)
             .then(res => {
+                if(res.data.user.roles.includes("ADMIN")){
+                    sessionStorage.setItem("IsAdmin",true);
+                }
+                
                 console.log(res.data.user)
                 sessionStorage.setItem("jwt",res.data.jwt);
                 sessionStorage.setItem("user",JSON.stringify(res.data?res.data.user:null));

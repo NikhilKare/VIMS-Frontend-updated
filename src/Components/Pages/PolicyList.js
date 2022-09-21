@@ -15,7 +15,7 @@ function PolicyList(props){
      
       return (
       <>
- <div class="container my-5">
+ <div class="container15">
                   {
             props.policies.length!==0?
                   props.policies.map(policy=>

@@ -7,9 +7,10 @@ import Authorization from "../../Authorization";
 import { Dropdown } from "react-bootstrap";
 
 function RoleNavbar() {
+  const history=useHistory();
     const state = useSelector((state) => state);
     console.log(Authorization.IsCustomer());
-    if (state.loggedin.IsLoggedIn) {
+    if (Authorization.IsLoggedIn()) {
       return (
         <>
 <div class="dropdown">
@@ -18,10 +19,10 @@ function RoleNavbar() {
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
   {
-    Authorization.IsAdmin()?<Link className="dropdown-item" to="/profile">ADMIN</Link>:""
+    Authorization.getUser().roles.includes("ADMIN")?<Link onClick={()=>{sessionStorage.setItem("IsAdmin",true);window.location.reload()}}  className="dropdown-item" >ADMIN</Link>:""
   }
   {
-    Authorization.IsProvider()?<Link className="dropdown-item" to="/profile">POLICY PROVIDER</Link>:""
+    Authorization.IsProvider()?<Link onClick={()=>{sessionStorage.setItem("IsAdmin",false);window.location.reload()}} className="dropdown-item" >POLICY PROVIDER</Link>:""
   }
   {
     Authorization.IsCustomer()?

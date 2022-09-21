@@ -16,5 +16,7 @@ const deletePolicy=(id)=>{
 const updatePolicy=(id)=>{
    return httpClient.put(`/provider/${id}`)
 }
-
-export default {getAllProviderPolicies,addPolicy,deletePolicy,updatePolicy}
+const getProvider=()=>{
+   return httpClient.get(`/provider/${Authorization.getUser().userId}`)
+}
+export default {getAllProviderPolicies,addPolicy,deletePolicy,updatePolicy,getProvider}

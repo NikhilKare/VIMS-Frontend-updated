@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import {  useSelector } from 'react-redux';
 import { Link, NavLink, useHistory } from 'react-router-dom';
 import Authorization from '../../Authorization';
-import CustomerService from '../../Services/CustomerService';
-import ProviderService from '../../Services/ProviderService';
+
 import './policy.css'
 
 
@@ -16,25 +15,29 @@ const Policy = (props) => {
     console.log(props)
     const p = props.policy;
     const history=useHistory();
+
     const buyPolicy=(e)=>{
       e.preventDefault();
         //console.log(e.target.value)
         //console.log(state.policy)
         console.log(sessionStorage.getItem("chasisNo"))
+        sessionStorage.setItem("policyId",e.target.value);
         if(sessionStorage.getItem("chasisNo")==null){
-          sessionStorage.setItem("policyId",e.target.value);
+          
           alert("choose Vehicle")
           history.push("/profile")
         }
           else
           {
-            CustomerService.subscribePolicy(sessionStorage.getItem("chasisNo"),e.target.value).then(res=>{
-              console.log(res.data)
-              sessionStorage.removeItem("policyId");
-                sessionStorage.removeItem("chasisNo");
-              alert(res.data.data);
-              history.push("/");
-            }).catch(err=>console.log(err))
+            // CustomerService.subscribePolicy(sessionStorage.getItem("chasisNo"),e.target.value).then(res=>{
+            //   console.log(res.data)
+            //   sessionStorage.removeItem("policyId");
+            //     sessionStorage.removeItem("chasisNo");
+            //   alert(res.data.data);
+            //   history.push("/");
+            // }).catch(err=>console.log(err))
+            sessionStorage.setItem("policy",JSON.stringify(props.policy))
+                history.push("/payment")
           }
     }
 
