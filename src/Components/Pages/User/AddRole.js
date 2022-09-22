@@ -4,11 +4,11 @@ import { useHistory } from 'react-router-dom'
 import UserService from '../../../Services/UserService';
 import React, { useEffect, useState} from 'react'
 import * as Components from './../User/RoleComponent';
-
+import { useDispatch, useSelector } from "react-redux";
 
 function AddRole(){
     const history = useHistory();
-
+    const despatch=useDispatch();
     const[checked,setChecked]=useState(true)
     const[checked1,setChecked1]=useState(false)
 
@@ -42,8 +42,20 @@ function AddRole(){
         .then(res=>{
             const user=JSON.parse(sessionStorage.getItem("user"))
             user.roles.push(role.roles);
-            console.log(user);
-            sessionStorage.setItem("user",JSON.stringify(user));
+            UserService.getUser()
+            .then(resp=>{
+                console.log(resp.data.data)
+                sessionStorage.setItem("user",JSON.stringify(resp.data.data))
+                sessionStorage.setItem("roles",JSON.stringify(resp.data.data.roles))
+                window.location.reload();
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+            // sessionStorage.removeItem("user");
+            // sessionStorage.setItem("user",JSON.stringify(res.data.user))
+            console.log(res.data);
+            despatch({type:"IsLoggedIn"});
             history.push(`/profile`,res.data.data)
         })
         .catch(err=>{

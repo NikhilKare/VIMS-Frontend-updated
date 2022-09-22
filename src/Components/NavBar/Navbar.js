@@ -21,6 +21,7 @@ const Navbar = () => {
   const state = useSelector((state) => state);
   const history=useHistory();
   const [showMediaIcons, setShowMediaIcons] = useState(false);
+  
 const logout=()=>{
   dispatch({type:"LogOut"});
   sessionStorage.clear();
@@ -34,6 +35,7 @@ const logout=()=>{
         {/* 1st logo part  */}
         <div className="logo">
           <h2>
+            <span>V</span>ehicle
             <span>I</span>nsurance
             <span>B</span>azaar
           </h2>
@@ -49,7 +51,7 @@ const logout=()=>{
               <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <NavLink to="/profile" >Profile</NavLink>
+              <NavLink to={Authorization.IsLoggedIn()?"/profile":"/sign-up-in"} >Profile</NavLink>
             </li>
             <li>
               <NavLink to="/policies">Policies</NavLink>
@@ -59,7 +61,7 @@ const logout=()=>{
             </li> */}
             <div className="login">
             <li onClick={Authorization.IsLoggedIn()?logout:""}>
-            <NavLink to={Authorization.IsLoggedIn()?"":"/sign-up-in"}>
+            <NavLink to={Authorization.IsLoggedIn()?"":"/login"}>
               {Authorization.IsLoggedIn()?"Logout":`LOGIN/REGISTER`}
               </NavLink>
             </li>           

@@ -27,6 +27,7 @@ import Admin from './Components/Pages/Admin/Admin';
 import Contact from './Components/Test/Contact';
 import { Payment } from './Components/Pages/Customer/Payment';
 import Reciept from './Components/Pages/Invoice/Reciept';
+import { ForgetPass } from './Components/Pages/User/ForgetPass';
 
 
 function App() {
@@ -34,9 +35,11 @@ function App() {
   const [policy,setPolicy]=useState();
   
   
+  
 
   return (
     <>  
+
     <Router>
     
     {Authorization.IsAdmin()?<AdminNavbar/>:<Navbar/>}
@@ -48,7 +51,7 @@ function App() {
       <Route path='/policies' component={AllPolicyList}/>
       <Route path='/addRole' component={AddRole}/>
       <Route path='/roles' render={()=><Roles roles={Authorization.getUser().roles}/>}/>
-      <Route path='/sign-up-in' render={()=><RegisterLogin/>} />
+      <Route path='/login' render={()=><RegisterLogin toggle={true}/>} />
       <Route path='/showpolicy' render={()=><Policy policy={policy} isView={true}/>} />
       <Route path="/users"component={EditUser} />
       <Route path="/uploadImg" component={UploadImage} />
@@ -58,7 +61,6 @@ function App() {
       <Route path="/providers"component={Admin} />
       <Route path="/payment"component={Payment} />
       <Route path="/reciept"component={Reciept} />
-      
     </Switch>
     <Footer/>
     </Router>

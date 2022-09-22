@@ -42,10 +42,11 @@ const deleteVechile=(vid)=>{
     return httpClient.delete(`/customers/${user.userId}/vehicles/${vid}`)
 
 }
-const getVechileDetails=(vid)=>{
+const getVechileDetails= async()=>{
     const user=Authorization.getUser();
-    return httpClient.get(`/customers/${user.userId}/vehiclePolicyDetails/${vid}`)
-    
+    //const vid=sessionStorage.getItem("chasisNo")
+    const vid="1234566"
+    return httpClient.get(`/customers/${user.userId}/vehiclePolicyDetails/${vid}`) 
 }
 
 

@@ -8,10 +8,11 @@ import reg from './img/register.svg'
 import { useDispatch } from 'react-redux';
 import Authorization from '../Authorization';
 import UserService from '../Services/UserService';
+import { ForgetPass } from './Pages/User/ForgetPass';
 
 
 const RegisterLogin = (props) => {
-
+    const[forget,setForget]=useState(false);
     const history = useHistory();
     const history1 = useHistory();
     const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const RegisterLogin = (props) => {
             [name]: value
         })
     }
-
+    
     //SENDING AXIOS REQUEST
     const login = async (e) => {
         e.preventDefault();
@@ -142,9 +143,7 @@ const RegisterLogin = (props) => {
             })
             .catch(err => {
                 console.log(err)
-            })
-
-        
+            })   
     }
 
 console.log(emails)
@@ -170,7 +169,7 @@ useEffect(()=>{
     }
 
 
-    const [signIn, toggle] = React.useState(false);
+    const [signIn, toggle] = React.useState(props.toggle);
     return (
         <>
             <Components.Container>
@@ -195,22 +194,24 @@ useEffect(()=>{
                         <img src={reg} alt="signin" width='500px' height='250px' />
                     </Components.Form>
                 </Components.SignUpContainer>
-
+                
                 <Components.SignInContainer signinIn={signIn}>
+                {
+                forget?<ForgetPass setForget={setForget}/>:
                     <Components.Form onSubmit={login}>
+                        
                         <Components.Title>Login</Components.Title>
                         <Components.Input type='email' name="email" value={user1.email} onChange={handleLogin} placeholder="Enter your Email" />
                         <Components.Input type='password' name="password" value={user1.password} onChange={handleLogin} placeholder="Enter your Password" />
-                        <Components.Anchor href='#'>Forgot your password?</Components.Anchor>
+                        <Components.Anchor onClick={(e)=>{e.preventDefault();setForget(true)}} href='/forgetpass'>Forgot your password?</Components.Anchor>
                         <Components.Button onClick={login}>Login</Components.Button><br />
                         {/* <Components.Button onClick={getData}>Home</Components.Button> */}
                         <img src={log} alt="register" width='500px' />
                     </Components.Form>
-                </Components.SignInContainer>
-
+                    }
+                </Components.SignInContainer>               
                 <Components.OverlayContainer signinIn={signIn}>
                     <Components.Overlay signinIn={signIn}>
-
                         <Components.LeftOverlayPanel signinIn={signIn}>
                             <Components.Title>Welcome Back!</Components.Title>
                             <Components.Paragraph>
@@ -220,7 +221,6 @@ useEffect(()=>{
                                 Login
                             </Components.GhostButton>
                         </Components.LeftOverlayPanel>
-
                         <Components.RightOverlayPanel signinIn={signIn}>
                             <Components.Title>Hello, Friend!</Components.Title>
                             <Components.Paragraph>

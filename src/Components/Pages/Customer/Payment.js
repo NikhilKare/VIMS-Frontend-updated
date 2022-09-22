@@ -50,10 +50,10 @@ export const Payment = () => {
             .then(res => {
                 console.log(res.data)
                 sessionStorage.removeItem("policyId");
-                sessionStorage.removeItem("chasisNo");
+                //sessionStorage.removeItem("chasisNo");
                 sessionStorage.removeItem("policy");
                 alert("Policy Subscribed ")
-                history.push("/profile")
+                history.push("/reciept")
 
             })
             .catch(err => {
@@ -175,7 +175,7 @@ export const Payment = () => {
                        
                                                         
                     </div>
-                    <input type="submit" value="submit" class="submit-btn" />
+                    <input  type="submit" value="submit" class="submit-btn" />
                 </form>
 
             </div>

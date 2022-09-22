@@ -11,9 +11,6 @@ let IsAdmin=()=>{
 };
 let IsUser=()=>JSON.parse(sessionStorage.getItem("roles"))!=null&&JSON.parse(sessionStorage.getItem("roles")).includes("USER");
 let IsProvider=()=>JSON.parse(sessionStorage.getItem("roles"))!=null&&JSON.parse(sessionStorage.getItem("roles")).includes("POLICY_PROVIDER");
-// let setProvider=()=>{
-//     httpCommon.get()
-// }
 let IsCustomer=()=>{return JSON.parse(sessionStorage.getItem("roles"))!=null&&JSON.parse(sessionStorage.getItem("roles")).includes("CUSTOMER");}
 let getUser=()=>JSON.parse(sessionStorage.getItem("user"));
 let getName=()=>JSON.parse(sessionStorage.getItem("user")).firstName + " " + JSON.parse(sessionStorage.getItem("user")).lastName;

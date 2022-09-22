@@ -10,7 +10,7 @@ function HeroSection(){
           {/* hero section  */}
       <section className="hero-section">
         <p>Welcome to </p>
-        <h1>Insurance Bazaar</h1>
+        <h1>Vehicle Insurance Bazaar</h1>
       </section>
         <div className="best-place">
              <div className="container">

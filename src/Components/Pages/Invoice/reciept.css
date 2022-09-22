@@ -1,12 +1,17 @@
-body{
+/* body{
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
     background:#eee;
     margin-top:20px;
+    } */
+    .receptcontainer{
+        background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
     }
     .text-danger strong {
                 color: #9f181c;
             }
             .receipt-main {
-                background: #ffffff none repeat scroll 0 0;
+                
+                background:white none repeat scroll 0 0;
                 border-bottom: 12px solid #333333;
                 border-top: 12px solid #9f181c;
                 margin-top: 50px;
@@ -46,15 +51,15 @@ body{
             }
             
             .receipt-right h5 {
-                float: right;
+              
                 align-items: flex-end;
-                font-size: 16px;
+                font-size: 18px;
                 font-weight: bold;
-                margin: 0 0 7px 0;
+                margin: 0px 5px -5px 0px;
             }
             .receipt-right p {
-                font-size: 12px;
-                margin: 0px;
+                font-size: 15px;
+                margin-left: 10px;
             }
             .receipt-right p i {
                 text-align: center;
@@ -96,10 +101,43 @@ body{
             }
             .img{
                 width: 71px ;
-                 border-radius:43px;
+                border-radius:43px;
+                margin-left: 60px;
+                margin-top: -350px;
             }
             .rec{
                 
                 float: right;
             }
-            
+            .l1{
+                
+                margin-left: 650px;
+                
+            }
+            .rec1{
+                margin-right: -60px;
+                margin-top: -150px;
+            }
+            .invo{
+                margin-left: 350px;
+                margin-bottom: 20px;
+            }
+            .p1{
+                margin-left: 350px;
+            }
+            .logo1{
+                width: null;
+                height: 250px;
+                display: flex;
+                margin-left: auto;
+                margin-right: auto;
+
+            }
+            .logo3{
+                width: null;
+                height: 250px;
+                display: flex;
+                margin-left: -600px;
+                margin-right: 0px;
+            }
+          
