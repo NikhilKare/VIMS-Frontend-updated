@@ -36,10 +36,18 @@ const subscribePolicy=(vid,policyId)=>{
     const user=JSON.parse(sessionStorage.getItem("user"));
     return httpClient.get(`/customers/${user.userId}/vehicles/${vid}/addPolicy?policyId=${policyId}`)
 }
+
 const deleteVechile=(vid)=>{
     const user=Authorization.getUser();
     return httpClient.delete(`/customers/${user.userId}/vehicles/${vid}`)
+
+}
+const getVechileDetails=(vid)=>{
+    const user=Authorization.getUser();
+    return httpClient.get(`/customers/${user.userId}/vehiclePolicyDetails/${vid}`)
+    
 }
 
-export default {getAllVechiles,addVehicle,getLicenseNo,subscribePolicy,deleteVechile,getPolicyById,doPayment};
+
+export default {getAllVechiles,addVehicle,getLicenseNo,subscribePolicy,deleteVechile,getPolicyById,doPayment,getVechileDetails};
   
