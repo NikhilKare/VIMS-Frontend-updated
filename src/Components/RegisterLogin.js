@@ -147,7 +147,6 @@ const RegisterLogin = (props) => {
         
     }
 
-
 console.log(emails)
 useEffect(()=>{
         setFormErrors(validate(formValues));
@@ -179,7 +178,6 @@ useEffect(()=>{
                     <Components.Form>
                         <Components.Title>Create Account</Components.Title>
                         <Components.Input type='text' name="firstName" value={user.firstName} placeholder='Enter your First Name' onChange={handlechange} />
-                        
                         <Components.Input type='text' name="lastName" value={user.lastName} placeholder='Enter your last Name' onChange={handlechange} />
                         <Components.Input type='text' name="userName" value={user.userName} placeholder='Enter your User Name' onChange={handlechange} />
                         <span>{formErrors.userName}</span>

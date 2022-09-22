@@ -26,6 +26,7 @@ import AdminNavbar from './Components/NavBar/AdminNavbar';
 import Admin from './Components/Pages/Admin/Admin';
 import Contact from './Components/Test/Contact';
 import { Payment } from './Components/Pages/Customer/Payment';
+import Reciept from './Components/Pages/Invoice/Reciept';
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
       <Route path="/updatepolicy"component={EditPolicy} />
       <Route path="/providers"component={Admin} />
       <Route path="/payment"component={Payment} />
+      <Route path="/reciept"component={Reciept} />
       
     </Switch>
     <Footer/>
