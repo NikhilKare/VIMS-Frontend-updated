@@ -58,7 +58,7 @@ ${props => (props.signinIn !== true ? `transform: translateX(100%);` : null)}
 
 export const Form = styled.form`
 background-color: #ffffff;
-display: flex;
+display: relative;
 align-items: center;
 justify-content: center;
 flex-direction: column;

@@ -1,11 +1,13 @@
 
-import { red } from '@mui/material/colors';
 import React, { useEffect, useState } from 'react'
 import CustomerService from '../../../Services/CustomerService';
 import './payment.css'
 import chip from '../../../Components/img/chip.png'
 import visa from '../../../Components/img/visa.png'
+import { Details } from '@mui/icons-material';
+import { useHistory } from 'react-router-dom';
 export const Payment = () => {
+    const history=useHistory()
     const v = {
         cardNumber: "#################",
         cardHolder: "full Name",
@@ -43,28 +45,33 @@ export const Payment = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        CustomerService.doPayment(payment)
+        if(Object.keys(formErrors).length===0){
+            CustomerService.doPayment(payment)
             .then(res => {
                 console.log(res.data)
                 sessionStorage.removeItem("policyId");
                 sessionStorage.removeItem("chasisNo");
                 sessionStorage.removeItem("policy");
+                alert("Policy Subscribed ")
+                history.push("/profile")
+
             })
             .catch(err => {
                 console.log(err)
             })
+        }
+        else{
+            alert("please check payment details");
+        }
+        
     }
 
     const validate = (values) => {
         const errors = {
-            cardNumber: "",
-            cvv: ""
         };
-        const regex = /^\d{4}$/;
+        const regex = /^\d{16}$/;
         if (!values.cardNumber.match(regex)) {
             errors.cardNumber = "please check your card Number"
-        } else {
-            errors.cardNumber = ""
         }
         return errors;
     }
@@ -87,7 +94,6 @@ export const Payment = () => {
                             <div class="box">
                                 <span>card holder Name</span>
                                 <div class="card-holder-name">{payment.cardHolder}</div>
-
                             </div>
 
                             <div class="box">
@@ -119,23 +125,22 @@ export const Payment = () => {
                     </div>
                     <div class="inputBox">
                         <span>card holder</span>
-                        <input name='cardHolder' onChange={handleChange} required value={formValues.cardHolder} type="text" class="card-holder-input" />
-                        {/* <p style={{color:"red"}}>{formErrors.cardHolder}</p> */}
+                        <input name='cardHolder' onChange={handleChange} required  value={formValues.cardHolder} type="text" class="card-holder-input" />
                     </div>
                     <div class="flexbox">
                         <div class="inputBox">
                             <span>expiration mm</span>
                             <select name="mdate" required onChange={handleChange} value={formValues.mdate} id="" class="month-input">
                                 <option value="month" selected disabled>month</option>
-                                <option value="01">01</option>
-                                <option value="02">02</option>
-                                <option value="03">03</option>
-                                <option value="04">04</option>
-                                <option value="05">05</option>
-                                <option value="06">06</option>
-                                <option value="07">07</option>
-                                <option value="08">08</option>
-                                <option value="09">09</option>
+                                <option value="1">01</option>
+                                <option value="2">02</option>
+                                <option value="3">03</option>
+                                <option value="4">04</option>
+                                <option value="5">05</option>
+                                <option value="6">06</option>
+                                <option value="7">07</option>
+                                <option value="8">08</option>
+                                <option value="9">09</option>
                                 <option value="10">10</option>
                                 <option value="11">11</option>
                                 <option value="12">12</option>
@@ -156,6 +161,7 @@ export const Payment = () => {
                                 <option value="2029">2029</option>
                                 <option value="2030">2030</option>
                             </select>
+                            
                         </div>
                         <div class="inputBox">
                             <span>cvv</span>
@@ -166,6 +172,8 @@ export const Payment = () => {
                     <div class="inputBox">
                         <span>Amount</span>
                         <input name='cardHolder' value={JSON.parse(sessionStorage.getItem("policy")).policyPremium} readOnly type="text" class="card-holder-input" />
+                       
+                                                        
                     </div>
                     <input type="submit" value="submit" class="submit-btn" />
                 </form>

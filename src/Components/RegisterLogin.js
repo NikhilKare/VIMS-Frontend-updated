@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Register.css"
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
@@ -7,13 +7,14 @@ import log from './img/log.svg'
 import reg from './img/register.svg'
 import { useDispatch } from 'react-redux';
 import Authorization from '../Authorization';
+import UserService from '../Services/UserService';
 
 
 const RegisterLogin = (props) => {
 
     const history = useHistory();
     const history1 = useHistory();
-    const dispatch=useDispatch();
+    const dispatch = useDispatch();
     const [user1, setUser1] = useState({
         email: "",
         password: ""
@@ -33,33 +34,32 @@ const RegisterLogin = (props) => {
         e.preventDefault();
         axios.post("http://localhost:8080/api/login", user1)
             .then(res => {
-                if(res.data.user.roles.includes("ADMIN")){
-                    sessionStorage.setItem("IsAdmin",true);
+                if (res.data.user.roles.includes("ADMIN")) {
+                    sessionStorage.setItem("IsAdmin", true);
                 }
-                
+
                 console.log(res.data.user)
-                sessionStorage.setItem("jwt",res.data.jwt);
-                sessionStorage.setItem("user",JSON.stringify(res.data?res.data.user:null));
+                sessionStorage.setItem("jwt", res.data.jwt);
+                sessionStorage.setItem("user", JSON.stringify(res.data ? res.data.user : null));
                 // sessionStorage.setItem("email", res.email);
                 // sessionStorage.setItem("uname", res.name);
-                
+
                 sessionStorage.setItem("id", res.id);
                 sessionStorage.setItem(
                     "roles",
-                    JSON.stringify(res.data.user.roles.length!==0?res.data.user.roles:[]
-                  ));
+                    JSON.stringify(res.data.user.roles.length !== 0 ? res.data.user.roles : []
+                    ));
 
-                  dispatch({type:"IsLoggedIn"});
-                 
+                dispatch({ type: "IsLoggedIn" });
+
                 alert(res.data.user.firstName)
                 console.log(res)
-                if(res.data.user.roles.includes("ADMIN"))
+                if (res.data.user.roles.includes("ADMIN"))
                     history.push("/admin")
-                else
-                {
+                else {
                     history1.push("/profile")
                 }
-            }).catch(err=>{console.log(err)})
+            }).catch(err => { console.log(err) })
     }
 
     //register
@@ -73,15 +73,93 @@ const RegisterLogin = (props) => {
         password: "",
         confirmpassword: ""
     })
+    const [emails,setEmails]=useState([]);
+    const [userNames,setUserNames] = useState([]);
+
+    const initailValues = {
+        userName: "",
+        contactNumber: "",
+        email: "",
+        password: "",
+        confirmpassword: ""
+    }
+    const [formValues, setFormValues] = useState(initailValues);
+    const [formErrors, setFormErrors] = useState({});
     const handlechange = event => {
         const { name, value } = event.target
         setUser({
             ...user, [name]: value
         })
+        setFormValues({
+            ...formValues, [name]: value
+        })
+
+
     }
-    const register = () => {
+
+    const validate = (values) => {
+        console.log("in Error")
+        const errors = {
+        };
+
+        const contactReg = /^\d{10}$/;
+        const passReg = /((?=.*\d)(?=.*[a-z])(?=.*[#@$*]).{8,12})/;
+        if (!values.contactNumber.match(contactReg)) {
+            errors.contactNumber = "please Enter No with contry code +91"
+        } 
+
+        if (!values.password.match(passReg)) {
+            errors.password = "password word should contain a letter,special symbol and digit and 8 to 12 characters"
+        }
+        if (values.confirmpassword !== values.password) {
+            errors.confirmpassword = "password not matched"
+        } 
+        if (emails.includes(values.email)) {
+            errors.email = "email already exists"
+        } 
+        if (userNames.includes(values.userName)) {
+            errors.userName = "user Name already exists"
+        } 
+
+
+        return errors;
+    }
+
+    const loadEmailsAndUserNames=()=>{
+        UserService.getEmails()
+            .then((res) => {
+               // console.log(res.data)
+                setEmails(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+               
+            })
+        UserService.getUSerNames()
+            .then((res) => {
+                //console.log(res.data)
+                setUserNames(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+        
+    }
+
+
+console.log(emails)
+useEffect(()=>{
+        setFormErrors(validate(formValues));
+    }, [formValues])
+
+    useEffect(()=>loadEmailsAndUserNames(),[])
+    const register = (e) => {
+        e.preventDefault();
         const { firstName, lastName, userName, address, contactNumber, email, password, confirmpassword } = user
-        if (firstName && lastName && userName && address && contactNumber && email && password && (password === confirmpassword)) {
+        
+        if (Object.keys(formErrors).length===0) {
+           // firstName && lastName && userName && address && contactNumber && email && password && (password === confirmpassword)
             axios.post("http://localhost:8080/api", user)
                 .then(resp => {
                     alert(resp.data)
@@ -101,13 +179,19 @@ const RegisterLogin = (props) => {
                     <Components.Form>
                         <Components.Title>Create Account</Components.Title>
                         <Components.Input type='text' name="firstName" value={user.firstName} placeholder='Enter your First Name' onChange={handlechange} />
+                        
                         <Components.Input type='text' name="lastName" value={user.lastName} placeholder='Enter your last Name' onChange={handlechange} />
                         <Components.Input type='text' name="userName" value={user.userName} placeholder='Enter your User Name' onChange={handlechange} />
+                        <span>{formErrors.userName}</span>
                         <Components.Input type='text' name="address" value={user.address} placeholder='Enter your Address' onChange={handlechange} />
                         <Components.Input type='text' name="contactNumber" value={user.contactNumber} placeholder='Enter your Contact Number' onChange={handlechange} />
+                        <span>{formErrors.contactNumber}</span>
                         <Components.Input type='email' name="email" value={user.email} placeholder='Enter your Email' onChange={handlechange} />
+                        <span>{formErrors.email}</span>
                         <Components.Input type='password' name="password" value={user.password} placeholder='Enter your Password' onChange={handlechange} />
+                        <span>{formErrors.password}</span>
                         <Components.Input type='password' name="confirmpassword" value={user.confirmpassword} placeholder='Confirm Password' onChange={handlechange} />
+                        <span>{formErrors.confirmpassword}</span>
                         <Components.Button onClick={register}>Register</Components.Button><br />
                         {/* <Components.Button onClick={()=>history.push("/")}>Home</Components.Button> */}
                         <img src={reg} alt="signin" width='500px' height='250px' />

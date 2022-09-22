@@ -12,5 +12,12 @@ const getAll = () => {
     return httpClient.put(`/users/${user.userId}`)
   }
 
+  const getUSerNames=()=>{
+    return httpClient.get('/unames')
+}
+  const getEmails=()=>{
+      return httpClient.get('/emails')
+  }
+
   
-  export default {getAll,addRole,updateProfile};
+  export default {getAll,addRole,updateProfile,getUSerNames,getEmails};
