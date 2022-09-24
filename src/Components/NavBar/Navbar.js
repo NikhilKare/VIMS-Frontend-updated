@@ -25,8 +25,8 @@ const Navbar = () => {
 const logout=()=>{
   dispatch({type:"LogOut"});
   sessionStorage.clear();
-  
   history.push("/");
+  window.location.reload();
 }
   return (
     <>
@@ -51,7 +51,7 @@ const logout=()=>{
               <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <NavLink to={Authorization.IsLoggedIn()?"/profile":"/sign-up-in"} >Profile</NavLink>
+              <NavLink to={Authorization.IsLoggedIn()?"/profile":"/login"} >Profile</NavLink>
             </li>
             <li>
               <NavLink to="/policies">Policies</NavLink>

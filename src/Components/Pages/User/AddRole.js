@@ -11,7 +11,7 @@ function AddRole(){
     const despatch=useDispatch();
     const[checked,setChecked]=useState(true)
     const[checked1,setChecked1]=useState(false)
-
+    const[companies,setCompanies]=useState([])
     const [role, setRole] = useState({
         companyName:"",
         licenceNo:"",
@@ -24,6 +24,14 @@ function AddRole(){
             ...role, [e.target.name]: e.target.value
         })
     }
+
+    useEffect(()=>{
+        UserService.getAllCompanies().then(res=>{
+            console.log(res.data);
+            setCompanies(res.data)
+            })
+            .catch(err=>console.error(err))
+    },[])
     useEffect(()=>{
         if(checked)
             setRole({
@@ -69,16 +77,24 @@ function AddRole(){
         <div className='container'>
         <h1>Add Role Page</h1>    
             <Components.Form>           
-            <Components.Input type='radio' name="roleName" value={"CUSTOMER"} onChange={()=>setChecked(!checked)} checked={checked}/>Customer
+            <Components.Input type='radio' name="roleName" value={"CUSTOMER"} onChange={()=>{setChecked1(!checked1);setChecked(!checked)}} checked={checked}/>Customer
             {
                 checked?(
                     <Components.Input type='text' name="licenceNo" value={role.licenceNo} placeholder='Enter licence No' onChange={handlechange} />
                 ):<></>
             }
-            <br/><Components.Input type='radio' name="roleName" value={role.roles} onChange={()=>setChecked1(!checked1)} checked={checked1} />Policy Provider 
+            <br/><Components.Input type='radio' name="roleName" value={role.roles} onChange={()=>{setChecked(!checked);setChecked1(!checked1)}} checked={checked1} />Policy Provider 
             {
                 checked1?(
-                    <Components.Input type='text' name="companyName" value={role.companyName} placeholder='Enter Company Name' onChange={handlechange} />
+                    // <Components.Input type='text' name="companyName" value={role.companyName} placeholder='Enter Company Name' onChange={handlechange} />
+                    <>
+                    <select name="companyName" className='dropdown' value={role.companyName} placeholder='Enter Company Name' onChange={handlechange} >
+                       {companies.map(c=>{
+                            return <option value={c}><p style={{"font-size": "15px"}}>{c}</p></option>
+                       })      
+                       }  
+                    </select>
+                    </>
                 ):<></>
             }
             <Components.Button onClick={addRole}>Add Role</Components.Button>
