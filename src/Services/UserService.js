@@ -24,6 +24,13 @@ const getUser=()=>{
   return httpClient.get(`/users/${user.userId}`)
 }
 
+const updatePassword=(userUpdate)=>{
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  return httpClient.post(`/users/${user.userId}/resetPass`,userUpdate)
+}
 
+const getAllCompanies=()=>{
+  return httpClient.get(`/users/getCompanies`)
+}
 
-export default { getAll, addRole, updateProfile, getUSerNames, getEmails,getUser};
+export default { getAll, addRole, updateProfile, getUSerNames, getEmails,getUser,updatePassword,getAllCompanies};

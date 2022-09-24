@@ -55,11 +55,11 @@ const RegisterLogin = (props) => {
 
                 alert(res.data.user.firstName)
                 console.log(res)
-                if (res.data.user.roles.includes("ADMIN"))
+                // if (res.data.user.roles.includes("ADMIN"))
                     history.push("/admin")
-                else {
+                // else {
                     history1.push("/profile")
-                }
+                // }
             }).catch(err => { console.log(err) })
     }
 

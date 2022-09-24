@@ -1,10 +1,14 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import * as Components from '../../Pages/Component';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+<<<<<<< HEAD
 import forget from './../../img/forget-pass.svg'
+=======
+import UserService from '../../../Services/UserService';
+
+>>>>>>> d2134be1c515e976369ad18d31620bb7116ada60
 export const ForgetPass = (props) => {
     const history = useHistory();
     const[boolean,setBoolean]=useState(true);
@@ -12,13 +16,56 @@ export const ForgetPass = (props) => {
         email: "",
         otp: ""
     }, [])
+    const [update,setUpdate]=useState(false);
+    const [password, setPassword] = useState({
+        password: '',
+        confirmPass:''
+    }, [])
     const handleLogin = event => {
         const { name, value } = event.target
         setUser1({
             ...user1,
             [name]: value
         })
-    }
+    }  
+    
+    
+       
+        const [min, setMinutes] = useState(0);
+        const [sec, setSeconds] = useState(0);
+     
+        const deadline = Date.now()+10*60*1000;
+       
+      
+        const getTime = () => {
+          const time = deadline-Date.now();
+          setMinutes(Math.floor((time/1000/60) % 60));
+          setSeconds(Math.floor((time/1000) % 60));
+        };
+      
+        useEffect(() => {
+          const interval = setInterval(() => getTime(deadline), 1000);
+          return () => clearInterval(interval);
+        },boolean);
+      
+  
+//     const fun=()=>{
+//         if(sec===0){
+//             setSec(60);
+//             setMin(min-1);
+//         }
+//    else{
+//     setSec(sec-1)
+//    }
+// }
+
+//     useEffect(()=>{
+//         if(boolean){
+//            setTimeout(()=>fun(),1000); 
+//         }
+//     }
+//     ,[])
+    
     const setOTP=(e)=>{
         
         e.preventDefault();
@@ -27,7 +74,6 @@ export const ForgetPass = (props) => {
                 console.log(res)
                 setBoolean(false);
                 alert("OTP send Successfully...")
-                
             }).catch(err => { 
                 console.log(err) 
             })
@@ -38,17 +84,54 @@ export const ForgetPass = (props) => {
         axios.post("http://localhost:8080/api/forgetpass",user1)
             .then(res => {
                 console.log(res)
-                setBoolean(false);
-                alert("OTP Validated...please check your Email")
-                props.setForget(false);
-                
+                setBoolean(true);
+                alert("OTP Validated...please Set New Password")
+                sessionStorage.setItem("jwt",res.data.jwt);
+                sessionStorage.setItem("user",JSON.stringify(res.data.user));
+                console.log(res.data.jwt);
+                console.log(res.data.user)
+                setUpdate(true);
+
             }).catch(err => { 
                 console.log(err) 
                 alert("Wrong OTP")
             })
     }
+    const handleUpdate = event => {
+        console.log(event.target.value)
+        const { name, value } = event.target
+        setPassword({
+            ...password,
+            [name]: value
+        })
+    }  
+    const changePass=(e)=>{
+        e.preventDefault();
+        if(password.confirmPass!==password.password)
+            alert("password not matched")
+        else{
+            UserService.updatePassword({email:user1.email,newPass:password.password}).then(res=>{
+                console.log(res.data);
+                props.setForget(false);
+            })
+            .catch(err=>console.log(err))
+        }
+    }
     return (
         <div>
+           {update?
+           <Components.Form>
+                <Components.Title>Change Password</Components.Title>
+
+               <Components.Input   type='text' name="password" value={password.password} onChange={handleUpdate} placeholder="Enter New Password" />
+                <Components.Input    type='text' name="confirmPass" value={password.confirmPass} onChange={handleUpdate} placeholder="Confirm Password" />                
+                 <Components.Button onClick={changePass}>Submit</Components.Button><br />
+              
+                
+                {/* <img src={} alt="register" width='500px' /> */}
+            </Components.Form>
+           
+           :
             <Components.Form>
                 <Components.Title>Forget Password</Components.Title>
 
@@ -59,16 +142,22 @@ export const ForgetPass = (props) => {
                 {boolean?"":<Components.Input type='text'  name="otp" value={user1.otp} onChange={handleLogin} placeholder="Enter OTP" />}
                 {
                     boolean?
-                    <><Components.Button onClick={setOTP}>Generate OTP</Components.Button><br /></>:
+                    <><Components.Button onClick={setOTP}>Generate OTP</Components.Button><br />
                     
-                    <><Components.Button onClick={submitOTP}>Submit</Components.Button><br /></>
+                    </>:
+                    
+                    <>
+                    <p>Send Otp after {min}.{sec}</p>
+                    <Components.Button onClick={submitOTP}>Submit</Components.Button><br /></>
                 }
                 
                 <img src={forget} alt="register" style={{width:"550px",height:"650px"}} />
             </Components.Form>
+}
         </div>
     )
 }
+
 export default ForgetPass;
 
 
