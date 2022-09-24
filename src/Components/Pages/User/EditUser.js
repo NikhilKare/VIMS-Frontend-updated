@@ -53,10 +53,12 @@ const EditUser=()=>{
                         <Components.Input type='text' name="email" value={email} placeholder='Enter Email Address' onChange={onInputChange} />
                         
                         <br/>
-                        <Components.Button onClick={saveUser}>Confirm</Components.Button><br/>
-                        <Components.Cancel  onClick={()=>history.push("/profile")}>Cancel</Components.Cancel>
+                        <Components.Button onClick={saveUser}>Confirm</Components.Button><br/><br/>
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                       <Components.Cancel  onClick={()=>history.push("/profile")}>Cancel</Components.Cancel>
                         <br />
-                        <img src={reg} alt="signin" width='500px' height='250px' />
+                        <img src={reg} alt="signin" 
+                        style={{width:"400px",height:"400px"}} />
                     </Components.Form>          
             </Components.div> 
       )

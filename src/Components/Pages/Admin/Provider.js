@@ -75,6 +75,7 @@ const Provider = (props) => {
         <small class="d-block heading">Status</small>
         <small class="d-block my-3">{p.status}</small>
       </div>
+      
       {/* <div class="text-center text-uppercase text-secondary">
         <small class="d-block heading">Duration</small>
         <small class="d-block my-3">{p.duration} YEARS</small>

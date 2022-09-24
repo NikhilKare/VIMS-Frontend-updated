@@ -24,11 +24,15 @@ function Admin() {
     }
     return (
         <>
-            <input
-                type="text"
-                placeholder="Search"
-                onChange={nameFilter}
-            />
+            <div class="col-xs-3 mt-5 mb-4 text-gred">                                      
+                                           <form class="form-inline">
+                                                <input onChange={nameFilter}
+                                                
+                                                style={{fontSize:"20px",marginLeft:"550px",width:"50%"}} 
+                                                class="form-control mr-sm-2" 
+                                                type="search" placeholder="Search by Provider name" aria-label="Search" />
+                                            </form>      
+                                    </div>
             {
                 providers1.map(p => {
                     return (

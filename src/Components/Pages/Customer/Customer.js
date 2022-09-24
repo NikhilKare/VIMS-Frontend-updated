@@ -10,7 +10,7 @@ import Authorization from "./../../../Authorization"
 import "./customer.css";
 import profile from '../../../Components/img/profile.png'
 import Form from 'react-bootstrap/Form';
-
+import back from '../../../assets/img/background.jpg'
 function Customer(props) {
     const history = useHistory();
     const [vehicles, setVehicles] = useState([]);
@@ -94,7 +94,7 @@ function Customer(props) {
 
         // .catch(err=>console.log(err))
     }
-    
+
     const showPolicy = (e) => {
         e.preventDefault();
         const policyId = e.target.value;
@@ -138,8 +138,10 @@ function Customer(props) {
     return (
 
         <>
-
-            <div className="container emp-profile">
+    <div className="container11">
+        
+   
+            <div className="emp-profile">
                 <form method="post">
                     <div class="row">
                         <div class="col-md-4">
@@ -166,8 +168,10 @@ function Customer(props) {
                             </div>
                         </div>
                         <div className="col-md-2">
-                            <Link className="btn btn-info" to={`/users`}>Update Profile</Link>
-                            <Link to={"/uploadImg"} class="file btn btn-lg btn-primary">
+                            <Link className="btn btn-info" to={`/users`}
+                                style={{fontSize:"20px"}}
+                            >Update Profile</Link><br/>
+                            <Link to={"/uploadImg"}  style={{fontSize:"20px"}} class="file btn btn-lg btn-primary">
                                 Change Photo
                             </Link>
                         </div>
@@ -266,14 +270,15 @@ function Customer(props) {
                                                 setSearchTerm(e.target.value)
                                             }}
                                         ></input> */}
-                                    <div class="col-xs-3 mt-5 mb-4 text-gred">                                      
-                                           <form class="form-inline">
-                                                <input onChange={(e) => {
-                                                setSearchTerm(e.target.value)}} 
-                                                style={{fontSize:"20px"}} 
-                                                class="form-control mr-sm-2" 
+                                    <div class="col-xs-3 mt-5 mb-4 text-gred">
+                                        <form class="form-inline">
+                                            <input onChange={(e) => {
+                                                setSearchTerm(e.target.value)
+                                            }}
+                                                style={{ fontSize: "20px", marginLeft: "350px", width: "50%" }}
+                                                class="form-control mr-sm-2"
                                                 type="search" placeholder="Search" aria-label="Search" />
-                                            </form>      
+                                        </form>
                                     </div>
                                     <div >
                                         <table className="table table-striped table-hover table-bordered">
@@ -297,7 +302,7 @@ function Customer(props) {
                                                     if (searchTerm === "") {
                                                         return v
                                                     } else if (v.vehicleNumber.toLowerCase().includes(searchTerm.toLowerCase())
-                                                                ||v.vehicleType.toLowerCase().includes(searchTerm.toLowerCase())) {
+                                                        || v.vehicleType.toLowerCase().includes(searchTerm.toLowerCase())) {
                                                         return v
                                                     }
                                                 }).map(v =>
@@ -309,25 +314,29 @@ function Customer(props) {
                                                         <td>{v.vehicleNumber}</td>
                                                         <td>{v.subscriptionDate ? v.subscriptionDate : "---------"}</td>
                                                         <td>{v.expiryDate ? v.expiryDate : "----------"}</td>
-                                                        <td>{v.policy ? <button value={v.policy.policyId} onClick={showPolicy} className="btn btn-primary mb-2">Show Policy</button> : <button onClick={addPolicy} value={v.chasisNo} className="btn btn-primary mb-2">Add Policy</button>}</td>
-                                                        <td><button onClick={deleteVehicle} value={v.chasisNo} className="btn btn-danger mb-2">Delete</button></td>
+                                                        <td>{v.policy ? <button value={v.policy.policyId} onClick={showPolicy} className="btn btn-primary mb-2"  style={{fontSize:"15px"}}>Show Policy</button> : <button onClick={addPolicy} value={v.chasisNo} className="btn btn-primary mb-2">Add Policy</button>}</td>
+                                                        <td><button onClick={deleteVehicle} value={v.chasisNo} className="btn btn-danger mb-2" style={{fontSize:"15px"}}>Delete</button></td>
                                                     </tr>
                                                 )}
                                             </tbody>
-                                            <Link to="/vehicle" className="btn btn-primary mb-2">Add Vehicle</Link>
+                                            <Link to="/vehicle" className="btn btn-primary mb-2"
+                                             style={{fontSize:"20px"}}
+                                            >Add Vehicle</Link>
                                         </table>
                                     </div>
                                 </div>
                                 <div className="tab-pane fade" id="policy" role="tabpanel" aria-labelledby="profile-tab">
                                     <PolicyList policies={policies} delete={deleteHandler} />
-                                    <Link to="/addPolicy" className="btn btn-primary mb-2">Add Policy</Link>
+                                    <Link to="/addPolicy" className="btn btn-primary mb-2"
+                                     style={{fontSize:"20px"}}
+                                    >Add Policy</Link>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
-
+            </div>
         </>
 
     )

@@ -191,7 +191,7 @@ useEffect(()=>{
                         <span>{formErrors.confirmpassword}</span>
                         <Components.Button onClick={register}>Register</Components.Button><br />
                         {/* <Components.Button onClick={()=>history.push("/")}>Home</Components.Button> */}
-                        <img src={reg} alt="signin" width='500px' height='250px' />
+                        <img src={reg} alt="signin" style={{width:'500px',height:'250px'}} />
                     </Components.Form>
                 </Components.SignUpContainer>
                 

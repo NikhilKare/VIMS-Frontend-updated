@@ -28,6 +28,7 @@ import Contact from './Components/Test/Contact';
 import { Payment } from './Components/Pages/Customer/Payment';
 import Reciept from './Components/Pages/Invoice/Reciept';
 import { ForgetPass } from './Components/Pages/User/ForgetPass';
+import { Banner } from './Components/Test/Banner';
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
     {Authorization.IsAdmin()?<AdminNavbar/>:<Navbar/>}
     {/* <CustomerNavbar/> */}
     <Switch>
+      {/* <Route path="/" exact component={Home}/> */}
       <Route path="/" exact component={Home}/>
       <Route path='/profile' render={()=> {return <Customer setPolicy={setPolicy}/>}}/>
       <Route path='/vehicle' component={AddVehicle}/>

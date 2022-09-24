@@ -1,18 +1,22 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import headerImg from "../assets/img/header-img.svg";
+import headerImg from "../../assets/img/header-img.svg";
 import { ArrowRightCircle } from 'react-bootstrap-icons';
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
+import HeroSection from "../HeroSection";
+import { Link, useHistory } from "react-router-dom";
 
 export const Banner = () => {
+  const history=useHistory();
+
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState('');
   const [delta, setDelta] = useState(300 - Math.random() * 100);
   const [index, setIndex] = useState(1);
-  const toRotate = [ "Web Developer", "Web Designer", "UI/UX Designer" ];
-  const period = 2000;
+  const toRotate = [ "Developed by", "NIKHIL", "SAMEER" ];
+  const period = 1000;
 
   useEffect(() => {
     let ticker = setInterval(() => {
@@ -55,10 +59,9 @@ export const Banner = () => {
             <TrackVisibility>
               {({ isVisible }) =>
               <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                <span className="tagline">Welcome to my Portfolio</span>
-                <h1>{`Hi! I'm Judy`} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Web Developer", "Web Designer", "UI/UX Designer" ]'><span className="wrap">{text}</span></span></h1>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                  <button onClick={() => console.log('connect')}>Let’s Connect <ArrowRightCircle size={25} /></button>
+                <span className="tagline">HOLA WARM REGARDS FROM TEAM VIB</span>
+                <h1>{`Hi!Welcome to Vehicle Insurance Bazaar`}<br/><span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Developed By", "NIKHIL", "SAMEER" ]'><span className="wrap">{text}</span></span></h1>
+                  <Link to={'/login'}><button>Let’s Connect <ArrowRightCircle size={25} /></button></Link>
               </div>}
             </TrackVisibility>
           </Col>
@@ -72,6 +75,8 @@ export const Banner = () => {
           </Col>
         </Row>
       </Container>
+      <HeroSection/>
     </section>
+    
   )
 }

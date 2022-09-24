@@ -15,7 +15,14 @@ function PolicyList(props){
      
       return (
       <>
- <div class="container15">
+ <div class="container15"
+      style={{width:"130%",
+      fontSize:"10px",
+      marginLeft:"-250px",
+      marginRight:"40px",
+      padding:"8%"
+      }}
+ >
                   {
             props.policies.length!==0?
                   props.policies.map(policy=>

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import * as Components from '../../Pages/Component';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import forget from './../../img/forget-pass.svg'
 export const ForgetPass = (props) => {
     const history = useHistory();
     const[boolean,setBoolean]=useState(true);
@@ -64,7 +64,7 @@ export const ForgetPass = (props) => {
                     <><Components.Button onClick={submitOTP}>Submit</Components.Button><br /></>
                 }
                 
-                {/* <img src={} alt="register" width='500px' /> */}
+                <img src={forget} alt="register" style={{width:"550px",height:"650px"}} />
             </Components.Form>
         </div>
     )

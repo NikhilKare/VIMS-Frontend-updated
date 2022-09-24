@@ -9,13 +9,11 @@ function HeroSection(){
      <div>
           {/* hero section  */}
       <section className="hero-section">
-        <p>Welcome to </p>
-        <h1>Vehicle Insurance Bazaar</h1>
       </section>
         <div className="best-place">
              <div className="container">
                 <div className="left-block">
-                    <div className="txt-block opacity-1">What makes<br/> 
+                    <div className="txt-block">What makes<br/> 
                         <span>Insurance Bazaar</span> the<br/> <span>best place</span> to buy<br/> <span>insurance</span> in <br className="hide-big"/> India?
                         <img src={why} alt="whatMakesInsurance" height='500px'/>
                     </div>

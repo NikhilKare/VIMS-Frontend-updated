@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./navbar.css";
 import "./Button.css";
+
 
 
 import { Link, useHistory } from 'react-router-dom';
@@ -28,9 +29,11 @@ const logout=()=>{
   
   history.push("/");
 }
+
   return (
     <>
     <Fragment>
+     
       <nav className="main-nav">
         {/* 1st logo part  */}
         <div className="logo">
@@ -48,21 +51,21 @@ const logout=()=>{
           }>
           <ul>
             <li>
-              <NavLink to="/">Home</NavLink>
+              <NavLink style={{fontSize:"30px"}} to="/">Home</NavLink>
             </li>
             <li>
-              <NavLink to={Authorization.IsLoggedIn()?"/profile":"/sign-up-in"} >Profile</NavLink>
+              <NavLink style={{fontSize:"30px"}} to={Authorization.IsLoggedIn()?"/profile":"/login"} >Profile</NavLink>
             </li>
             <li>
-              <NavLink to="/policies">Policies</NavLink>
+              <NavLink style={{fontSize:"30px"}} to="/policies">Policies</NavLink>
             </li>
             {/* <li>
               <NavLink to="/payment">Payment</NavLink>
             </li> */}
             <div className="login">
             <li onClick={Authorization.IsLoggedIn()?logout:""}>
-            <NavLink to={Authorization.IsLoggedIn()?"":"/login"}>
-              {Authorization.IsLoggedIn()?"Logout":`LOGIN/REGISTER`}
+            <NavLink style={{fontSize:"30px"}} to={Authorization.IsLoggedIn()?"":"/login"}>
+              {Authorization.IsLoggedIn()?"Logout":`Login/Register`}
               </NavLink>
             </li>           
             </div>
@@ -106,6 +109,7 @@ const logout=()=>{
           </div>
         </div>
       </nav>
+     
       </Fragment>
     </>
   );

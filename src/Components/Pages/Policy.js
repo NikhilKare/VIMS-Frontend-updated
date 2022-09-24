@@ -1,3 +1,4 @@
+import { padding } from '@mui/system';
 import { useEffect, useState } from 'react';
 import {  useSelector } from 'react-redux';
 import { Link, NavLink, useHistory } from 'react-router-dom';
@@ -52,7 +53,7 @@ const Policy = (props) => {
     }
     return (
         <>
-
+<div >
     <div class="my-5 py-4 px-5 bg-light d-sm-flex align-items-center justify-content-between">
       <div class="text-center">
       <small class="d-block heading">starting From</small>
@@ -85,15 +86,27 @@ const Policy = (props) => {
       :
       <div class="text-center">
         {
-         Authorization.IsCustomer()?<button onClick={buyPolicy} value={p.policyId} class="btn text-white px-5 py-3 main-btn">BUY</button>:"" 
+         Authorization.IsCustomer()?<button onClick={buyPolicy} value={p.policyId} class="btn text-white px-5 py-3 main-btn"
+       
+         >BUY</button>:"" 
         }
+        
+        <br/>
         &nbsp;&nbsp;
         {
-           props.delete?<button onClick={deletePolicy} value={p.policyId} class="btn text-white px-5 py-3 main-btn">Delete</button>:""
+           props.delete?<button onClick={deletePolicy} value={p.policyId} class="btn text-white px-5 py-3 main-btn"
+           style={{
+            margin:"2%",
+            marginRight:"20px"
+          }}
+           >Delete</button>:""
         }
+        <br/>
         &nbsp;&nbsp;
         {
-          props.delete?<button onClick={updatePolicy} value={p.policyId} class="btn text-white px-5 py-3 main-btn">Update</button>:""
+          props.delete?<button onClick={updatePolicy} value={p.policyId} class="btn text-white px-5 py-3 main-btn"
+    
+          >Update</button>:""
         }
         
       </div>
@@ -102,7 +115,7 @@ const Policy = (props) => {
    
    
   </div>
-  
+  </div>
 
  
 
