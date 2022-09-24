@@ -3,12 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import * as Components from '../../Pages/Component';
 import 'react-toastify/dist/ReactToastify.css';
-<<<<<<< HEAD
 import forget from './../../img/forget-pass.svg'
-=======
 import UserService from '../../../Services/UserService';
 
->>>>>>> d2134be1c515e976369ad18d31620bb7116ada60
 export const ForgetPass = (props) => {
     const history = useHistory();
     const[boolean,setBoolean]=useState(true);

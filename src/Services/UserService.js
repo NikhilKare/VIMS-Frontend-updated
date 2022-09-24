@@ -4,8 +4,9 @@ const addRole = (role) => {
   const user = JSON.parse(sessionStorage.getItem("user"));
   return httpClient.post(`/users/${user.userId}/role`, role)
 }
-const getAll = () => {
-  return httpClient.get('/policies');
+const getAll = (pageNo) => {
+  console.log("page no "+pageNo)
+  return httpClient.get(`/policies?pageNo=${pageNo}`);
 };
 const updateProfile = () => {
   const user = JSON.parse(sessionStorage.getItem("user"));
@@ -33,4 +34,8 @@ const getAllCompanies=()=>{
   return httpClient.get(`/users/getCompanies`)
 }
 
-export default { getAll, addRole, updateProfile, getUSerNames, getEmails,getUser,updatePassword,getAllCompanies};
+const getNoOfPolicies=()=>{
+  return httpClient.get(`/getNoOfPolicies`)
+}
+
+export default { getNoOfPolicies,getAll, addRole, updateProfile, getUSerNames, getEmails,getUser,updatePassword,getAllCompanies};
