@@ -15,7 +15,8 @@ function Customer(props) {
     const history = useHistory();
     const [vehicles, setVehicles] = useState([]);
     const [LicenseNo, setLicenseNo] = useState('');
-
+    const [pageNo,setPageNo]=useState(1);
+    const [noOfPage,setNoOfPage]=useState([]);
     const [policies, setPolicies] = useState([]);
 
 
@@ -28,18 +29,40 @@ function Customer(props) {
 
         }).catch(err => console.log(err))
     }
-    useEffect(() => {
-        console.log("in use")
-        if (Authorization.IsLoggedIn())
-            ProviderService.getAllProviderPolicies()
-                .then(response => {
 
-                    console.log('Printing policy data', response.data);
-                    setPolicies(response.data.data);
-                })
-                .catch(error => {
-                    console.log('Something went wrong', error);
-                })
+
+    const getAllPoliciesOfProvider=(pageNo)=>{
+        ProviderService.getAllPoliciesOfProvider(pageNo)
+        .then(response => {
+            console.log('Printing policy data', response.data);
+            setPolicies(response.data.data);
+        })
+        .catch(error => {
+            console.log('Something went wrong', error);
+        })
+      }
+    
+      useEffect(()=>{
+        console.log("in use")
+        if (Authorization.IsLoggedIn()&&Authorization.IsProvider()){
+            console.log("in page no changed")
+        getAllPoliciesOfProvider(pageNo);
+        }
+      },[pageNo])
+    useEffect(() => {
+        if(Authorization.IsProvider){
+            ProviderService.getNoOfPolicies().then(res=>{
+                console.log(res.data)
+                const arr=[];
+                for(var i=1;i<=Math.ceil(parseInt(res.data)/2);i++){
+                      arr.push(i)
+                }
+                   setNoOfPage(arr)  
+                console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1")
+          }).catch(err=>console.log(err))   
+        }
+       
+        
     }, []);
     const getLicenseNo = () => {
         CustomerService.getLicenseNo()
@@ -326,12 +349,19 @@ function Customer(props) {
                                     </div>
                                 </div>
                                 <div className="tab-pane fade" id="policy" role="tabpanel" aria-labelledby="profile-tab">
-                                    <PolicyList policies={policies} delete={deleteHandler} />
-                                    <Link to="/addPolicy" className="btn btn-primary mb-2"
+                                <Link to="/addPolicy" className="btn btn-primary mb-2"
                                      style={{fontSize:"20px"}}
                                     >Add Policy</Link>
+                                    <PolicyList policies={policies} delete={deleteHandler} />
+                                    <div style={{margin: "0 40%",
+  width: "50%",
+}}>
+                                    {noOfPage.map(i=><button style={{padding:10,margin:10,backgroundColor:"#9B5DE5"}} className="btn btn-success btn-circle btn-md" value={i} onClick={(e)=> {e.preventDefault(); setPageNo(e.target.value)}}>&nbsp;    {i}  &nbsp;    </button>)}
+
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </form>

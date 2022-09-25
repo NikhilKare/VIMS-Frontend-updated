@@ -11,21 +11,8 @@ import './policylist.css'
 function PolicyList(props){
  //const [any, forceUpdate] = useReducer(num => num + 1, 0);
       const[noOfPage,setNoOfPage]=useState([]);
-      // const str="";
-   useEffect(()=>{
-      UserService.getNoOfPolicies().then(res=>{
-                  console.log(res.data.data)
-                  const arr=[];
-                  for(var i=1;i<=Math.ceil(parseInt(res.data.data)/2);i++){
-                        arr.push(i)
-                  }
-                     setNoOfPage(arr)  
-                  console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1")
-      }).catch(err=>console.log(err))
-   },[])
-    
-   console.log(noOfPage)
-      
+      // const str="";    
+  
    
       return (
       <>
@@ -34,7 +21,7 @@ function PolicyList(props){
       fontSize:"10px",
       marginLeft:"-250px",
       marginRight:"40px",
-      padding:"8%"
+      padding:"0 8%"
       }}
  >
                   {
@@ -43,8 +30,7 @@ function PolicyList(props){
                   <Policy policy={policy} delete={props.delete}/>):
                   "No Policies available"}
           </div>
-        {noOfPage.map(i=><button value={i} onClick={props.getPage}>&nbsp;    {i}  &nbsp;    </button>)}
-
+        
 </> 
       );
 }

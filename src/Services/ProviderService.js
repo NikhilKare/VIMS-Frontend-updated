@@ -1,8 +1,8 @@
 import Authorization from "../Authorization";
 import httpClient from "./http-common";
 
-const getAllProviderPolicies=()=>{
-   return httpClient.get(`/provider/${Authorization.getUser().userId}/policies`)
+const getAllPoliciesOfProvider=(pageNo)=>{
+   return httpClient.get(`/provider/${Authorization.getUser().userId}/policies?pageNo=${pageNo}`)
 }
 
 const addPolicy=(policy)=>{
@@ -19,4 +19,8 @@ const updatePolicy=(id)=>{
 const getProvider=()=>{
    return httpClient.get(`/provider/${Authorization.getUser().userId}`)
 }
-export default {getAllProviderPolicies,addPolicy,deletePolicy,updatePolicy,getProvider}
+
+const getNoOfPolicies=()=>{
+   return httpClient.get(`/provider/${Authorization.getUser().userId}/countPolicy`)
+}
+export default {getAllPoliciesOfProvider,addPolicy,deletePolicy,updatePolicy,getProvider,getNoOfPolicies}

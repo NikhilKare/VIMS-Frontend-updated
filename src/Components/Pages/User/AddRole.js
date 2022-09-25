@@ -5,6 +5,7 @@ import UserService from '../../../Services/UserService';
 import React, { useEffect, useState} from 'react'
 import * as Components from './../User/RoleComponent';
 import { useDispatch, useSelector } from "react-redux";
+import { padding } from '@mui/system';
 
 function AddRole(){
     const history = useHistory();
@@ -88,9 +89,10 @@ function AddRole(){
                 checked1?(
                     // <Components.Input type='text' name="companyName" value={role.companyName} placeholder='Enter Company Name' onChange={handlechange} />
                     <>
-                    <select name="companyName" className='dropdown' value={role.companyName} placeholder='Enter Company Name' onChange={handlechange} >
+                    <select style={{fontSize:"16px",width:"100%" ,padding:2,margin:10}} name="companyName" className='dropdown' value={role.companyName} placeholder='Enter Company Name' onChange={handlechange} >
+                    <option ><p   >--select--</p></option>
                        {companies.map(c=>{
-                            return <option value={c}><p style={{"font-size": "15px"}}>{c}</p></option>
+                            return <option  value={c}><p style={{"font-size": "15px"}}>{c}</p></option>
                        })      
                        }  
                     </select>

@@ -15,10 +15,10 @@ function RoleNavbar() {
         <>
 <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" 
-  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  type="button" style={{fontSize:"15px"}} id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Continue As
   </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  <div class="dropdown-menu" style={{fontSize:"15px"}} aria-labelledby="dropdownMenuButton">
   {
     Authorization.getUser().roles.includes("ADMIN")?<Link onClick={()=>{sessionStorage.setItem("IsAdmin",true);window.location.reload()}}  className="dropdown-item" >ADMIN</Link>:""
   }
