@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import Authorization from "./../../../Authorization"
 import reg from './../../img/register.svg'
 import * as Components from './../Component';
+import { toast } from "react-toastify";
 
 const EditUser=()=>{
     let history = useHistory(); 
@@ -28,12 +29,12 @@ const EditUser=()=>{
         e.preventDefault();
         await axios.put(`http://localhost:8080/api/users`,user)
         .then(res=>{
-            alert("User Data Updated Successfuly")
+            toast.success("User Data Updated Successfuly",1000)
             sessionStorage.setItem('user',JSON.stringify(user));
             history.push("/profile")
         })
         .catch(err=>{
-            alert ("Something went Wrong")
+            toast.error("Something went Wrong",1000)
         })
       }
     const loadUser = async () => {

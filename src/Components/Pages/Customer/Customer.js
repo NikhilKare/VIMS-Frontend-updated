@@ -1,18 +1,16 @@
 
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import CustomerService from "../../../Services/CustomerService";
 import ProviderService from "../../../Services/ProviderService";
-import RegisterLogin from "../../RegisterLogin";
 import PolicyList from "../PolicyList";
 import Authorization from "./../../../Authorization"
 import "./customer.css";
 import profile from '../../../Components/img/profile.png'
-import Form from 'react-bootstrap/Form';
-import back from '../../../assets/img/background.jpg'
-import UploadImage from "../ImageUpload";
 import Display from "../Display";
+import { toast } from "react-toastify";
+
 function Customer(props) {
     const history = useHistory();
     const [vehicles, setVehicles] = useState([]);
@@ -26,7 +24,7 @@ function Customer(props) {
     const deleteHandler = (id) => {
 
         ProviderService.deletePolicy(id).then(res => {
-            alert(res.data.data);
+            toast.success(res.data.data,1000);
             setPolicies(policies.filter(p => p.policyId != id))
 
         }).catch(err => console.log(err))
@@ -109,15 +107,9 @@ function Customer(props) {
             history.push("/policies")
         }
         else {
-            // CustomerService.subscribePolicy(e.target.value,sessionStorage.getItem("policyId")).then((res)=>{
-            //     sessionStorage.removeItem("policyId");
-            //     sessionStorage.removeItem("chasisNo");
-            //     alert(res.data.data);
             sessionStorage.setItem("policy", JSON.stringify(policies.find(p => p.policyId == sessionStorage.getItem("policyId"))))
             history.push("/payment")
         }
-
-        // .catch(err=>console.log(err))
     }
 
     useEffect(()=>{
@@ -146,7 +138,7 @@ function Customer(props) {
             })
             .catch(err => {
                 console.log(err)
-                alert(err.msg)
+                toast.error(err.msg,1000)
             })
     }
     const [provider, setProvider] = useState('');
@@ -289,15 +281,6 @@ function Customer(props) {
                                 </div>
 
                                 <div className="tab-pane  fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-
-                                    {/* <input
-                                            size='small'
-                                            type="text"
-                                            placeholder="Search"
-                                            onChange={(e) => {
-                                                setSearchTerm(e.target.value)
-                                            }}
-                                        ></input> */}
                                     <div class="col-xs-3 mt-5 mb-4 text-gred">
                                         <form class="form-inline">
                                             <input onChange={(e) => {
@@ -358,15 +341,11 @@ function Customer(props) {
                                      style={{fontSize:"20px"}}
                                     >Add Policy</Link>
                                     <PolicyList policies={policies} delete={deleteHandler} />
-                                    <div style={{margin: "0 40%",
-  width: "50%",
-}}>
+                                    <div style={{margin: "0 40%",width: "50%",}}>
                                     {noOfPage.map(i=><button style={{padding:10,margin:10,backgroundColor:"#9B5DE5",fontSize:"10px"}} className="btn btn-success btn-circle btn-md" value={i} onClick={(e)=> {e.preventDefault(); setPageNo(e.target.value)}}>&nbsp;    {i}  &nbsp;    </button>)}
-
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </form>

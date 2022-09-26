@@ -1,13 +1,8 @@
 
 import React, { useState} from 'react'
-import "./../../Register.css"
-import axios from 'axios'
-// import useAuth from '../hooks/useAuth';
 import { useHistory } from 'react-router-dom'
 import * as Components from './../Component';
-import log from './../../img/log.svg'
 import reg from './../../img/register.svg'
-import emailjs from '@emailjs/browser';
 
 import CustomerService from "../../../Services/CustomerService";
 const LOGIN_URL = 'http://localhost:8080/api/login';

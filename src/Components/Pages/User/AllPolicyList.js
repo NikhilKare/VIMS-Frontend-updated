@@ -2,22 +2,13 @@ import { useEffect, useState } from 'react';
 import UserService from '../../../Services/UserService';
 import userService from '../../../Services/UserService';
 import PolicyList from "./../PolicyList"
-// import './allpolicylist.css'
 import "../Customer/customer.css"
+
 function AllPolicyList() {
   const [policies, setPolicies] = useState([]);
   const [pageNo,setPageNo]=useState(1);
   const [noOfPage,setNoOfPage]=useState([]);
 
-// const getPage=(e)=>{
-//   console.log(e.target.value);
-//   UserService.getAll(e.target.value).then(res=>{
-//     console.log(res.data)
-//     setPolicies(res.data)
-//   })
-//   .catch(err=>console.log(err));
-
-// }
 
 const getAllPolicies=(pageNo)=>{
   userService.getAll(pageNo)

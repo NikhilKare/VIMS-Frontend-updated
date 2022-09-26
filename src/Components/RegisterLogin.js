@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import "./Register.css"
+
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import * as Components from './Pages/Component';
@@ -70,7 +70,10 @@ const RegisterLogin = (props) => {
                 // else {
                     history1.push("/profile")
                 // }
-            }).catch(err => { console.log(err) })
+            }).catch(err => { 
+                    console.log(err) 
+                    
+                })
     }
 
     //register
@@ -144,6 +147,7 @@ const RegisterLogin = (props) => {
             })
             .catch(err => {
                 console.log(err)
+                toast.error("Something Went Wrong",1000)
                
             })
         UserService.getUSerNames()
@@ -153,6 +157,7 @@ const RegisterLogin = (props) => {
             })
             .catch(err => {
                 console.log(err)
+                toast.error("Something Went Wrong",1000)
             })   
     }
 
@@ -175,11 +180,11 @@ useEffect(()=>{
            // firstName && lastName && userName && address && contactNumber && email && password && (password === confirmpassword)
             axios.post("http://localhost:8080/api", user)
                 .then(resp => {
-                    alert(resp.data)
+                    toast.success(resp.data)
                     history.push(toggle(true))
                 })
         } else {
-            alert("invalid")
+            toast.error("Invalid",1000)
         }
     }
 

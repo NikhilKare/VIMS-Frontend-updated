@@ -61,8 +61,6 @@ function AddRole(){
             .catch(err=>{
                 console.log(err)
             })
-            // sessionStorage.removeItem("user");
-            // sessionStorage.setItem("user",JSON.stringify(res.data.user))
             console.log(res.data);
             despatch({type:"IsLoggedIn"});
             history.push(`/profile`,res.data.data)
@@ -87,7 +85,6 @@ function AddRole(){
             <br/><Components.Input type='radio' name="roleName" value={role.roles} onChange={()=>{setChecked(!checked);setChecked1(!checked1)}} checked={checked1} />Policy Provider 
             {
                 checked1?(
-                    // <Components.Input type='text' name="companyName" value={role.companyName} placeholder='Enter Company Name' onChange={handlechange} />
                     <>
                     <select style={{fontSize:"16px",width:"100%" ,padding:2,margin:10}} name="companyName" className='dropdown'  placeholder='Enter Company Name' onChange={handlechange} >
                     <option value='select' selected>--select--</option>

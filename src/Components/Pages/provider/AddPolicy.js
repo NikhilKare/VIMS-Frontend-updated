@@ -1,13 +1,8 @@
 
 import React, { useState} from 'react'
-import "./../../Register.css"
-
-// import useAuth from '../hooks/useAuth';
 import { useHistory } from 'react-router-dom'
 import * as Components from '../Component';
-
 import reg from './../../img/register.svg'
-
 import ProviderService from '../../../Services/ProviderService';
 
     
@@ -44,7 +39,6 @@ const AddPolicy = () => {
             <Components.div>               
                     <Components.Form>
                         <Components.Title>Add Policy </Components.Title>
-                        {/* <Components.Input hidden type='text' name="policyId" value={policyId} placeholder='' onChange={handlechange} /> */}
                         <Components.Input type='text' name="policyName" value={policyName} placeholder='Enter policy Name' onChange={handlechange} />
                         <Components.Input type='number' name="policyPremium" value={policyPremium} placeholder="Enter policy Pemium" onChange={handlechange} />
                         <Components.Input type='text' name="policyType" value={policyType} placeholder='Enter policy Type' onChange={handlechange} />

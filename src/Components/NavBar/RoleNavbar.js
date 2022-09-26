@@ -1,10 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 
 import React from 'react'
-import CustomerNavbar from "../Pages/Customer/CustomerNavbar";
 import Authorization from "../../Authorization";
-import { Dropdown } from "react-bootstrap";
+
 
 function RoleNavbar() {
   const history=useHistory();

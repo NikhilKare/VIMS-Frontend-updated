@@ -8,11 +8,6 @@ const AllVehicle=(props)=>{
         })
         .catch(err=>{
             console.log(err)
-        })
-    const getAll=()=>{
-        
-    }
-   
-    
+        }) 
 }
 export default AllVehicle;

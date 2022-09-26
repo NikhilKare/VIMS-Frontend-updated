@@ -1,16 +1,11 @@
 
 import React, { useEffect, useState} from 'react'
-import "./../../Register.css"
-
-// import useAuth from '../hooks/useAuth';
 import { useHistory } from 'react-router-dom'
 import * as Components from '../Component';
-
 import reg from './../../img/register.svg'
-
-import ProviderService from '../../../Services/ProviderService';
 import axios from 'axios';
 import Authorization from '../../../Authorization';
+import { toast } from 'react-toastify';
 
 
 const EditPolicy = () => {
@@ -39,12 +34,11 @@ const EditPolicy = () => {
         e.preventDefault();
         await axios.put(`http://localhost:8080/api/provider/${Authorization.getUser().userId}`,policy)
         .then(res=>{
-            alert("Policy Details Updated Successfuly")
-            
+            toast.success("Policy Details Updated Successfuly",1000)
             history.push("/profile")
         })
         .catch(err=>{
-            alert ("Something went Wrong")
+            toast.error("Something went Wrong",1000)
         })
       }
 
@@ -59,7 +53,6 @@ const EditPolicy = () => {
             <Components.div>               
                     <Components.Form>
                         <Components.Title>Update Policy </Components.Title>
-                        {/* <Components.Input hidden type='text' name="policyId" value={policyId} placeholder='' onChange={handlechange} /> */}
                         <Components.Input type='text' name="policyName" value={policyName} placeholder='Enter policy Name' onChange={handlechange} />
                         <Components.Input type='number' name="policyPremium" value={policyPremium} placeholder="Enter policy Pemium" onChange={handlechange} />
                         <Components.Input type='text' name="policyType" value={policyType} placeholder='Enter policy Type' onChange={handlechange} />

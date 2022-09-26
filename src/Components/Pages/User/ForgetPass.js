@@ -5,7 +5,8 @@ import * as Components from '../../Pages/Component';
 import 'react-toastify/dist/ReactToastify.css';
 import forget from './../../img/forget-pass.svg'
 import UserService from '../../../Services/UserService';
-import { WindowSharp } from '@mui/icons-material';
+import { toast } from 'react-toastify';
+
 
 export const ForgetPass = (props) => {
     const history = useHistory();
@@ -26,15 +27,10 @@ export const ForgetPass = (props) => {
             [name]: value
         })
     }  
-    
-    
-       
+
         const [min, setMinutes] = useState(0);
-        const [sec, setSeconds] = useState(0);
-     
-        const deadline = Date.now()+10*60*1000;
-       
-      
+        const [sec, setSeconds] = useState(0); 
+        const deadline = Date.now()+10*60*1000;      
         const getTime = () => {
           const time = deadline-Date.now();
           setMinutes(Math.floor((time/1000/60) % 60));
@@ -46,23 +42,6 @@ export const ForgetPass = (props) => {
           return () => clearInterval(interval);
         },boolean);
       
-  
-//     const fun=()=>{
-//         if(sec===0){
-//             setSec(60);
-//             setMin(min-1);
-//         }
-//    else{
-//     setSec(sec-1)
-//    }
-// }
-
-//     useEffect(()=>{
-//         if(boolean){
-//            setTimeout(()=>fun(),1000); 
-//         }
-//     }
-//     ,[])
     
     const setOTP=(e)=>{
         
@@ -71,7 +50,7 @@ export const ForgetPass = (props) => {
             .then(res => {
                 console.log(res)
                 setBoolean(false);
-                alert("OTP send Successfully...")
+                toast.success("OTP send Successfully...",1000)
             }).catch(err => { 
                 console.log(err) 
             })
@@ -83,7 +62,7 @@ export const ForgetPass = (props) => {
             .then(res => {
                 console.log(res)
                 setBoolean(true);
-                alert("OTP Validated...please Set New Password")
+                toast.success("OTP Validated...please Set New Password",1000)
                 sessionStorage.setItem("jwt",res.data.jwt);
                 sessionStorage.setItem("user",JSON.stringify(res.data.user));
                 console.log(res.data.jwt);
@@ -93,7 +72,7 @@ export const ForgetPass = (props) => {
                 
             }).catch(err => { 
                 console.log(err) 
-                alert("Wrong OTP")
+                toast.error("Wrong OTP",1000)
             })
     }
     const handleUpdate = event => {
@@ -107,7 +86,7 @@ export const ForgetPass = (props) => {
     const changePass=(e)=>{
         e.preventDefault();
         if(password.confirmPass!==password.password)
-            alert("password not matched")
+            toast.error("password not matched",1000)
         else{
             UserService.updatePassword({email:user1.email,newPass:password.password}).then(res=>{
                 console.log(res.data);
@@ -121,13 +100,9 @@ export const ForgetPass = (props) => {
            {update?
            <Components.Form>
                 <Components.Title>Change Password</Components.Title>
-
                <Components.Input   type='password' name="password" value={password.password} onChange={handleUpdate} placeholder="Enter New Password" />
                 <Components.Input    type='password' name="confirmPass" value={password.confirmPass} onChange={handleUpdate} placeholder="Confirm Password" />                
-                 <Components.Button onClick={changePass}>Submit</Components.Button><br />
-              
-                
-                {/* <img src={} alt="register" width='500px' /> */}
+                 <Components.Button onClick={changePass}>Submit</Components.Button><br />   
             </Components.Form>
            
            :

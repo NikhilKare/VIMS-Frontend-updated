@@ -1,14 +1,12 @@
 
- import { ToastContainer, toast } from 'react-toastify';
+ import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
-// import Navbar from './Components/Navbar';
 import Navbar from './Components/NavBar/Navbar';
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
 import Home from './Components/Pages/User/Home';
 import AllPolicyList from './Components/Pages/User/AllPolicyList';
 import RegisterLogin from './Components/RegisterLogin';
-// import Login from './Components/Login';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Footer from './Components/Footer';
@@ -20,7 +18,6 @@ import {  useState } from 'react';
 import AddRole from './Components/Pages/User/AddRole';
 import Policy from './Components/Pages/Policy';
 import EditUser from './Components/Pages/User/EditUser';
-import UploadImage from './Components/Pages/ImageUpload';
 import Policies from './Components/Pages/provider/Policies';
 import AddPolicy from './Components/Pages/provider/AddPolicy';
 import EditPolicy from './Components/Pages/provider/EditPolicy';
@@ -56,7 +53,6 @@ function App() {
       <Route path='/login' render={()=><RegisterLogin toggle={true}/>} />
       <Route path='/showpolicy' render={()=><Policy policy={policy} isView={true}/>} />
       <Route path="/users"component={EditUser} />
-      <Route path="/uploadImg" component={UploadImage} />
       <Route path="/policy_provider" component={Policies} />
       <Route path="/addPolicy" component={AddPolicy} />
       <Route path="/updatepolicy"component={EditPolicy} />

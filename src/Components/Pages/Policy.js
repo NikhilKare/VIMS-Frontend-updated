@@ -1,42 +1,29 @@
-import { padding } from '@mui/system';
-import { useEffect, useState } from 'react';
-import {  useSelector } from 'react-redux';
-import { Link, NavLink, useHistory } from 'react-router-dom';
+
+import { NavLink, useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Authorization from '../../Authorization';
 
 import './policy.css'
 
 
 const Policy = (props) => {
- 
-  const state=useSelector(state=>state);
-// useEffect(()=>{
-
-// },arr)
     console.log(props)
     const p = props.policy;
     const history=useHistory();
 
     const buyPolicy=(e)=>{
       e.preventDefault();
-        //console.log(e.target.value)
-        //console.log(state.policy)
+
         console.log(sessionStorage.getItem("chasisNo"))
         sessionStorage.setItem("policyId",e.target.value);
         if(sessionStorage.getItem("chasisNo")==null){
           
-          alert("choose Vehicle")
+          toast.error("choose Vehicle",1000)
           history.push("/profile")
         }
           else
           {
-            // CustomerService.subscribePolicy(sessionStorage.getItem("chasisNo"),e.target.value).then(res=>{
-            //   console.log(res.data)
-            //   sessionStorage.removeItem("policyId");
-            //     sessionStorage.removeItem("chasisNo");
-            //   alert(res.data.data);
-            //   history.push("/");
-            // }).catch(err=>console.log(err))
+        
             sessionStorage.setItem("policy",JSON.stringify(props.policy))
                 history.push("/payment")
           }
@@ -107,95 +94,11 @@ const Policy = (props) => {
         }
         
       </div>
-      }
-
-   
-   
+}   
   </div>
   </div>
 
- 
-
-
-
-        </>
-
-
-
-
-        // <div className="main-container">
-        //     <h2>Vehicles List</h2>
-        //     <hr />
-        //     <div>
-        //         <div className="container">
-        //             {
-        //                 <div className="row d-flex justify-content-center align-items-center h-100">
-        //                     <div className="col">
-        //                         <div className="card mb-4">
-        //                             <div className="card-body p-4">
-        //                                 <div className="row align-items-center">
-        //                                     <div className="col-md-2">
-        //                                         {/* <img src=""
-        //                         className="img-fluid" alt="Generic placeholder image"/> */}
-        //                                     </div>
-
-        //                                     <div className="col-md-2 d-flex justify-content-center">
-        //                                         <div>
-        //                                             <p className="small text-muted mb-4 pb-2">Chasis No</p>
-        //                                             <p className="lead fw-normal mb-0">{v.chasisNo}</p>
-        //                                         </div>
-        //                                     </div>
-        //                                     <div className="col-md-2 d-flex justify-content-center">
-        //                                         <div>
-        //                                             <p className="small text-muted mb-4 pb-2">Type</p>
-        //                                             <p className="lead fw-normal mb-0">{v.vehicleType}</p>
-        //                                         </div>
-        //                                     </div>
-        //                                     <div className="col-md-2 d-flex justify-content-center">
-        //                                         <div>
-        //                                             <p className="small text-muted mb-4 pb-2">Subscription Date</p>
-        //                                             <p className="lead fw-normal mb-0">{v.subscriptionDate}</p>
-        //                                         </div>
-        //                                     </div>
-        //                                     <div className="col-md-2 d-flex justify-content-center">
-        //                                         <div>
-        //                                             <p className="small text-muted mb-4 pb-2">Expiry Date</p>
-        //                                             <p className="lead fw-normal mb-0">{v.expiryDate}</p>
-        //                                         </div>
-        //                                     </div>
-        //                                     <div className="col-md-2 d-flex justify-content-center">
-        //                                         <div>
-        //                                             <p className="small text-muted mb-4 pb-2">Vehicle Number</p>
-        //                                             <p className="lead fw-normal mb-0">{v.vehicleNumber}</p>
-        //                                         </div>
-        //                                     </div>
-        //                                     <div className="col-md-2 d-flex justify-content-center">
-        //                                         <div>
-        //                                             <p className="small text-muted mb-4 pb-2"></p>
-        //                                             <p className="lead fw-normal mb-0">{v.policy}</p>
-        //                                             <button className='btn'>Buy</button>
-        //                                         </div>
-        //                                     {/* </div>
-        //                                     <div className="col-md-2 d-flex justify-content-center"> */}
-        //                                         <div>
-        //                                             <p className="small text-muted mb-4 pb-2"></p>
-        //                                             <p className="lead fw-normal mb-0">{v.policy}</p>
-        //                                             <button className='btn'>Delete</button>
-        //                                         </div>
-        //                                     </div>
-
-        //                                 </div>
-        //                             </div>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //             }</div>
-        //     </div>
-        // </div>
-
-
-    )
-
-
+    </>
+  )
 }
 export default Policy;

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import Authorization from "../../Authorization";
 
 const Display = (props) => {
@@ -30,7 +31,7 @@ const Display = (props) => {
         axios.post(`http://localhost:8080/api/users/${Authorization.getUser().userId}/image`, formData,
             { headers: { 'Content-type': 'multipart/form-data;boundary=<calculated when request is sent>' } })
             .then(res => {window.location.reload();closeDialog(); })
-            .catch(err => {alert("error");closeDialog()});
+            .catch(err => {toast.error("error");closeDialog()});
             
     }
 

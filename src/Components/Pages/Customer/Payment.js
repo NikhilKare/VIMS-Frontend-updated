@@ -6,6 +6,7 @@ import chip from '../../../Components/img/chip.png'
 import visa from '../../../Components/img/visa.png'
 import { Details } from '@mui/icons-material';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 export const Payment = () => {
     const history=useHistory()
     const v = {
@@ -50,9 +51,8 @@ export const Payment = () => {
             .then(res => {
                 console.log(res.data)
                 sessionStorage.removeItem("policyId");
-                //sessionStorage.removeItem("chasisNo");
                 sessionStorage.removeItem("policy");
-                alert("Policy Subscribed ")
+                toast.success("Policy Subscribed ",1000)
                 history.push("/reciept")
 
             })
@@ -61,7 +61,7 @@ export const Payment = () => {
             })
         }
         else{
-            alert("please check payment details");
+            toast.error("please check payment details",1000);
         }
         
     }
@@ -76,14 +76,10 @@ export const Payment = () => {
         return errors;
     }
 
-    return (
-        
-        
+    return ( 
         <div>
             <div class="container1">
-
                 <div class="card-container1">
-
                     <div class="front">
                         <div class="image">
                             <img src={chip} alt="" />
@@ -105,7 +101,6 @@ export const Payment = () => {
                             </div>
                         </div>
                     </div>
-
                     <div class="back">
                         <div class="stripe"></div>
                         <div class="box">
@@ -114,9 +109,7 @@ export const Payment = () => {
                             <img src="image/visa.png" alt="" />
                         </div>
                     </div>
-
                 </div>
-
                 <form onSubmit={handleSubmit}>
                     <div class="inputBox">
                         <span>card number</span>
