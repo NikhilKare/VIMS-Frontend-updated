@@ -39,7 +39,11 @@ function App() {
     <>  
 
     <Router>
-    <ToastContainer/>
+    <ToastContainer position="top-center"
+autoClose={750}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick/>
     {Authorization.IsAdmin()?<AdminNavbar/>:<Navbar/>}
     {/* <CustomerNavbar/> */}
     <Switch>

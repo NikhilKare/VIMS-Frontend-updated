@@ -1,20 +1,17 @@
-import { useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
 
+import { Link } from "react-router-dom";
 import React from 'react'
 import Authorization from "../../Authorization";
 
 
 function RoleNavbar() {
-  const history=useHistory();
-    const state = useSelector((state) => state);
     console.log(Authorization.IsCustomer());
     if (Authorization.IsLoggedIn()) {
       return (
         <>
 <div class="dropdown" style={{margin:"6% 10%"}}>
   <button class="btn btn-secondary dropdown-toggle" 
-  type="button" style={{fontSize:"15px"}} id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  type="button" style={{backgroundColor:"black",border:"1px solid",fontSize:"15px"}} id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Continue As
   </button>
   <div class="dropdown-menu" style={{fontSize:"15px"}} aria-labelledby="dropdownMenuButton">

@@ -36,11 +36,11 @@ const logout=()=>{
      
       <nav className="main-nav">
         {/* 1st logo part  */}
-        <div className="logo">
-          <h2>
-            <span>V</span>ehicle
+        <div className="logo" >
+          <h2 > 
+            <span >V</span>ehicle
             <span>I</span>nsurance
-            <span>B</span>azaar
+            <span >B</span>azaar
           </h2>
         </div>
 
@@ -51,28 +51,28 @@ const logout=()=>{
           }>
           <ul>
             <li>
-              <NavLink style={{fontSize:"30px"}} to="/">Home</NavLink>
+              <NavLink style={{fontSize:"30px",color:"white"}} to="/">Home</NavLink>
             </li>
            { Authorization.IsLoggedIn()?<li>
-            <NavLink style={{fontSize:"30px"}} to="/profile" >Profile</NavLink>
+            <NavLink style={{fontSize:"30px",color:"white"}} to="/profile" >Profile</NavLink>
               {/* <NavLink to={Authorization.IsLoggedIn()?"/profile":"/login"} >Profile</NavLink> */}
             </li>:""}
             <li>
-              <NavLink style={{fontSize:"30px"}} to="/policies">Policies</NavLink>
+              <NavLink style={{fontSize:"30px",color:"white"}} to="/policies">Policies</NavLink>
             </li>
             {/* <li>
               <NavLink to="/payment">Payment</NavLink>
             </li> */}
             <div className="login">
             <li onClick={Authorization.IsLoggedIn()?logout:""}>
-            <NavLink style={{fontSize:"30px"}} to={Authorization.IsLoggedIn()?"":"/login"}>
+            <NavLink style={{fontSize:"30px",color:"white"}} to={Authorization.IsLoggedIn()?"":"/login"}>
               {Authorization.IsLoggedIn()?"Logout":`Login/Register`}
               </NavLink>
             </li>
             </div>
             <div>
             {Authorization.IsLoggedIn()?
-            <li>
+            <li style={{color:"cyan"}}>
                   Hi, {Authorization.getName()}
             </li> :""}          
             </div>

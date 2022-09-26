@@ -103,7 +103,7 @@ function Customer(props) {
         console.log(state.policy)
         sessionStorage.setItem("chasisNo", e.target.value);
         if (sessionStorage.getItem("policyId") == null) {
-
+            toast.info("Please Choose Policy ")
             history.push("/policies")
         }
         else {

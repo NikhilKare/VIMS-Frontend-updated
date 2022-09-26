@@ -45,20 +45,20 @@ const logout=()=>{
           }>
           <ul>
             <li>
-              <NavLink to="/">Home</NavLink>
+              <NavLink style={{color:"white"}} to="/">Home</NavLink>
             </li>
             <li>
-              <NavLink to="/profile" >Profile</NavLink>
+              <NavLink  style={{color:"white"}} to="/profile" >Profile</NavLink>
             </li>
             <li>
-              <NavLink to="/providers">Providers</NavLink>
+              <NavLink  style={{color:"white"}} to="/providers">Providers</NavLink>
             </li>
             <li>
-              <NavLink to="/contact">contact</NavLink>
+              <NavLink style={{color:"white"}} to="/contact">contact</NavLink>
             </li>
             <div className="login">
             <li onClick={Authorization.IsLoggedIn()?logout:""}>
-            <NavLink to={Authorization.IsLoggedIn()?"":"/sign-up-in"}>
+            <NavLink style={{color:"white"}} to={Authorization.IsLoggedIn()?"":"/sign-up-in"}>
               {Authorization.IsLoggedIn()?"Logout":`LOGIN/REGISTER`}
               </NavLink>
             </li>           

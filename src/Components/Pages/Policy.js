@@ -18,7 +18,7 @@ const Policy = (props) => {
         sessionStorage.setItem("policyId",e.target.value);
         if(sessionStorage.getItem("chasisNo")==null){
           
-          toast.error("choose Vehicle",1000)
+          toast.info("please choose Vehicle",1000)
           history.push("/profile")
         }
           else
@@ -76,8 +76,7 @@ const Policy = (props) => {
          Authorization.IsCustomer()?<button onClick={buyPolicy} value={p.policyId} class="btn text-white px-5 py-3 main-btn"
        
          >BUY</button>:"" 
-        }
-        
+        } 
         <br/>
         &nbsp;&nbsp;
         {

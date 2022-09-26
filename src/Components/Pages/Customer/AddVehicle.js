@@ -5,6 +5,7 @@ import * as Components from './../Component';
 import reg from './../../img/register.svg'
 
 import CustomerService from "../../../Services/CustomerService";
+import { toast } from 'react-toastify';
 const LOGIN_URL = 'http://localhost:8080/api/login';
     
 
@@ -29,7 +30,7 @@ const AddVehicle = () => {
     const addVehcleDetails=(e)=>{
         e.preventDefault();
         CustomerService.addVehicle(vehicle).then(res=>{
-            console.log(res)
+            toast.success("Vehicle added successfully.......")
             history.push(`/profile`,res.data.data)
         }
         )
