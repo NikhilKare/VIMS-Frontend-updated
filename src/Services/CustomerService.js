@@ -44,8 +44,8 @@ const deleteVechile=(vid)=>{
 }
 const getVechileDetails= async()=>{
     const user=Authorization.getUser();
-    //const vid=sessionStorage.getItem("chasisNo")
-    const vid="1234566"
+    const vid=sessionStorage.getItem("chasisNo")
+    // const vid="1234566"
     return httpClient.get(`/customers/${user.userId}/vehiclePolicyDetails/${vid}`) 
 }
 

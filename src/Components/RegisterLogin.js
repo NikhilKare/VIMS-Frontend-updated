@@ -11,6 +11,7 @@ import UserService from '../Services/UserService';
 import { ForgetPass } from './Pages/User/ForgetPass';
 import Captcha from '../Captcha';
 import { LoadCanvasTemplateNoReload, loadCaptchaEnginge, validateCaptcha } from 'react-simple-captcha';
+import { toast } from 'react-toastify';
 
 
 const RegisterLogin = (props) => {
@@ -62,7 +63,7 @@ const RegisterLogin = (props) => {
 
                 dispatch({ type: "IsLoggedIn" });
 
-                alert(res.data.user.firstName)
+                toast.success("Welcome "+res.data.user.firstName,1000);
                 console.log(res)
                 // if (res.data.user.roles.includes("ADMIN"))
                     history.push("/admin")
@@ -211,7 +212,7 @@ useEffect(()=>{
                 
                 <Components.SignInContainer signinIn={signIn}>
                 {
-                forget?<ForgetPass setForget={setForget}/>:
+                forget?<ForgetPass setForget={setForget} />:
                     <Components.Form onSubmit={login}>
                         
                         <Components.Title>Login</Components.Title>

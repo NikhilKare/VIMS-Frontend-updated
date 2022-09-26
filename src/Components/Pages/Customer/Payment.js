@@ -130,7 +130,7 @@ export const Payment = () => {
                     <div class="flexbox">
                         <div class="inputBox">
                             <span>expiration mm</span>
-                            <select name="mdate" required onChange={handleChange} value={formValues.mdate} id="" class="month-input">
+                            <select name="mdate" required onChange={handleChange} id="" class="month-input">
                                 <option value="month" selected disabled>month</option>
                                 <option value="1">01</option>
                                 <option value="2">02</option>
@@ -148,7 +148,7 @@ export const Payment = () => {
                         </div>
                         <div class="inputBox">
                             <span>expiration yy</span>
-                            <select name="myear" required onChange={handleChange} value={formValues.myear} id="" class="year-input">
+                            <select name="myear" required onChange={handleChange} id="" class="year-input">
                                 <option value="year" selected disabled>year</option>
                                 <option value="2021">2021</option>
                                 <option value="2022">2022</option>
@@ -171,8 +171,8 @@ export const Payment = () => {
                     </div>
                     <div class="inputBox">
                         <span>Amount</span>
-                        <input name='cardHolder' value={JSON.parse(sessionStorage.getItem("policy")).policyPremium} readOnly type="text" class="card-holder-input" />
-                       
+                        <input name='amount' value={1.18*JSON.parse(sessionStorage.getItem("policy")).policyPremium} readOnly type="text" class="card-holder-input" />
+                        <p style={{ color: "black" }}>Gst amount {(0.18*JSON.parse(sessionStorage.getItem("policy")).policyPremium)}</p>
                                                         
                     </div>
                     <input  type="submit" value="submit" class="submit-btn" />

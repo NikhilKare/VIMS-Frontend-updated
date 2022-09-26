@@ -5,6 +5,7 @@ import * as Components from '../../Pages/Component';
 import 'react-toastify/dist/ReactToastify.css';
 import forget from './../../img/forget-pass.svg'
 import UserService from '../../../Services/UserService';
+import { WindowSharp } from '@mui/icons-material';
 
 export const ForgetPass = (props) => {
     const history = useHistory();
@@ -88,7 +89,8 @@ export const ForgetPass = (props) => {
                 console.log(res.data.jwt);
                 console.log(res.data.user)
                 setUpdate(true);
-
+                window.location.reload()
+                
             }).catch(err => { 
                 console.log(err) 
                 alert("Wrong OTP")

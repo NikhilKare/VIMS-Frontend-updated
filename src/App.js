@@ -1,4 +1,6 @@
 
+ import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 // import Navbar from './Components/Navbar';
 import Navbar from './Components/NavBar/Navbar';
@@ -29,20 +31,18 @@ import { Payment } from './Components/Pages/Customer/Payment';
 import Reciept from './Components/Pages/Invoice/Reciept';
 import { ForgetPass } from './Components/Pages/User/ForgetPass';
 import { Banner } from './Components/Test/Banner';
+import Display from './Components/Pages/Display';
 
 
 function App() {
 
   const [policy,setPolicy]=useState();
   
-  
-  
-
   return (
     <>  
 
     <Router>
-    
+    <ToastContainer/>
     {Authorization.IsAdmin()?<AdminNavbar/>:<Navbar/>}
     {/* <CustomerNavbar/> */}
     <Switch>
@@ -63,11 +63,11 @@ function App() {
       <Route path="/providers"component={Admin} />
       <Route path="/payment"component={Payment} />
       <Route path="/reciept"component={Reciept} />
-    
+      <Route path="/d"component={Display} />
     </Switch>
     <Footer/>
     </Router>
-  
+    
     
     </>
     
