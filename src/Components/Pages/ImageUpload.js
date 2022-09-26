@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import Authorization from "../../Authorization";
 
-const UploadImage=()=>{
+const UploadImage =()=>{
     const [imageFile, setImageFile] = useState();
     const [showPic, setPic] = useState({});
     const [imgFlag, setImgflag] = useState(false);

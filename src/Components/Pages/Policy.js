@@ -94,11 +94,8 @@ const Policy = (props) => {
         <br/>
         &nbsp;&nbsp;
         {
-           props.delete?<button onClick={deletePolicy} value={p.policyId} class="btn text-white px-5 py-3 main-btn"
-           style={{
-            margin:"2%",
-            marginRight:"20px"
-          }}
+           props.delete?<button style={{color:"danger"}} onClick={deletePolicy} value={p.policyId} class="btn text-white px-5 py-3 main-btn "
+          
            >Delete</button>:""
         }
         <br/>

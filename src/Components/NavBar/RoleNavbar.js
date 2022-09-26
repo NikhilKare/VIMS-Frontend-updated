@@ -13,7 +13,7 @@ function RoleNavbar() {
     if (Authorization.IsLoggedIn()) {
       return (
         <>
-<div class="dropdown">
+<div class="dropdown" style={{margin:"6% 10%"}}>
   <button class="btn btn-secondary dropdown-toggle" 
   type="button" style={{fontSize:"15px"}} id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Continue As
@@ -29,7 +29,7 @@ function RoleNavbar() {
     Authorization.IsCustomer()?
     <Link className="dropdown-item" to="/profile">CUSTOMER</Link>:""
   }
-  {
+  {(Authorization.IsCustomer()&&Authorization.IsProvider())?"":
     <Link className="dropdown-item" to="/addrole">+ Add Role</Link>
   }
    

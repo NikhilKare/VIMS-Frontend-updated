@@ -11,6 +11,8 @@ import "./customer.css";
 import profile from '../../../Components/img/profile.png'
 import Form from 'react-bootstrap/Form';
 import back from '../../../assets/img/background.jpg'
+import UploadImage from "../ImageUpload";
+import Display from "../Display";
 function Customer(props) {
     const history = useHistory();
     const [vehicles, setVehicles] = useState([]);
@@ -18,7 +20,7 @@ function Customer(props) {
     const [pageNo,setPageNo]=useState(1);
     const [noOfPage,setNoOfPage]=useState([]);
     const [policies, setPolicies] = useState([]);
-
+    const[show,setShow]=useState(false)
 
 
     const deleteHandler = (id) => {
@@ -118,6 +120,9 @@ function Customer(props) {
         // .catch(err=>console.log(err))
     }
 
+    useEffect(()=>{
+            
+    },show)
     const showPolicy = (e) => {
         e.preventDefault();
         const policyId = e.target.value;
@@ -156,20 +161,18 @@ function Customer(props) {
                 console.log(err)
             })
     }, [])
-
+    
     const [searchTerm, setSearchTerm] = useState("");
     return (
-
         <>
     <div className="container11">
         
-   
             <div className="emp-profile">
                 <form method="post">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="profile-img" col-md-4>
-                                <img className="profile-img" src={`http://localhost:8080/api/users/${Authorization.getUser().userId}/image`} alt="" onError={(e) => { e.target.onerror = null; e.target.src = profile }} />
+                                <img className="profile-img"  src={`http://localhost:8080/api/users/${Authorization.getUser().userId}/image`} alt="" onError={(e) => { e.target.onerror = null; e.target.src = profile }} />
 
                             </div>
 
@@ -194,9 +197,11 @@ function Customer(props) {
                             <Link className="btn btn-info" to={`/users`}
                                 style={{fontSize:"20px"}}
                             >Update Profile</Link><br/>
-                            <Link to={"/uploadImg"}  style={{fontSize:"20px"}} class="file btn btn-lg btn-primary">
-                                Change Photo
+                            <Link to={"/profile"}  style={{fontSize:"20px"}} class="file btn btn-lg btn-primary">
+                              <button onClick={(e)=>{e.preventDefault();setShow(!show)}}> Change Photo</button> 
                             </Link>
+                            <Display show={show} setShow={setShow}/> 
+                            
                         </div>
 
                     </div>

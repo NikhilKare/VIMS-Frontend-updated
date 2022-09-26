@@ -68,18 +68,25 @@ const logout=()=>{
             <NavLink style={{fontSize:"30px"}} to={Authorization.IsLoggedIn()?"":"/login"}>
               {Authorization.IsLoggedIn()?"Logout":`Login/Register`}
               </NavLink>
-            </li>           
-            </div>
-            <div>
-            <li>
-                <RoleNavbar />
             </li>
             </div>
+            <div>
+            {Authorization.IsLoggedIn()?
+            <li>
+                  Hi, {Authorization.getName()}
+            </li> :""}          
+            </div>
+           
           </ul>
         </div>
-
+       
+       <div>
+           
+         <RoleNavbar />
+          
+        </div>
         {/* 3rd social media links */}
-        <div className="social-media">
+        {/* <div className="social-media">
           <ul className="social-media-desktop">
             <li>
               <a
@@ -101,14 +108,14 @@ const logout=()=>{
             </li>
           </ul>
           
-          {/* hamburget menu start  */}
+          {/* hamburget menu start  *
           <div className="hamburger-menu">
             <a href="#" onClick={() => setShowMediaIcons(!showMediaIcons)}>
               <GiHamburgerMenu />
             </a>
            
           </div>
-        </div>
+        </div> */}
       </nav>
      
       </Fragment>
