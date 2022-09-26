@@ -9,6 +9,8 @@ import { useDispatch } from 'react-redux';
 import Authorization from '../Authorization';
 import UserService from '../Services/UserService';
 import { ForgetPass } from './Pages/User/ForgetPass';
+import Captcha from '../Captcha';
+import { LoadCanvasTemplateNoReload, loadCaptchaEnginge, validateCaptcha } from 'react-simple-captcha';
 
 
 const RegisterLogin = (props) => {
@@ -16,6 +18,7 @@ const RegisterLogin = (props) => {
     const history = useHistory();
     const history1 = useHistory();
     const dispatch = useDispatch();
+    const [captcha,setCaptcha]=useState("");
     const [user1, setUser1] = useState({
         email: "",
         password: ""
@@ -33,6 +36,12 @@ const RegisterLogin = (props) => {
     //SENDING AXIOS REQUEST
     const login = async (e) => {
         e.preventDefault();
+        if(validateCaptcha(captcha)==false)
+            {
+                alert("invalid Captcha")
+                return;
+            }
+
         axios.post("http://localhost:8080/api/login", user1)
             .then(res => {
                 if (res.data.user.roles.includes("ADMIN")) {
@@ -151,7 +160,12 @@ useEffect(()=>{
         setFormErrors(validate(formValues));
     }, [formValues])
 
-    useEffect(()=>loadEmailsAndUserNames(),[])
+    useEffect(()=>
+    {
+        loadEmailsAndUserNames();
+        loadCaptchaEnginge(6);
+    }
+    ,[])
     const register = (e) => {
         e.preventDefault();
         const { firstName, lastName, userName, address, contactNumber, email, password, confirmpassword } = user
@@ -203,6 +217,10 @@ useEffect(()=>{
                         <Components.Title>Login</Components.Title>
                         <Components.Input type='email' name="email" value={user1.email} onChange={handleLogin} placeholder="Enter your Email" />
                         <Components.Input type='password' name="password" value={user1.password} onChange={handleLogin} placeholder="Enter your Password" />
+                        
+                        <LoadCanvasTemplateNoReload  id="reload_href" />
+                        <Components.Input type='text' style={{width:"30%"}} name="captcha" value={captcha} onChange={e=>setCaptcha(e.target.value)} placeholder="Enter captcha" />
+                       
                         <Components.Anchor onClick={(e)=>{e.preventDefault();setForget(true)}} href='/forgetpass'>Forgot your password?</Components.Anchor>
                         <Components.Button onClick={login}>Login</Components.Button><br />
                         {/* <Components.Button onClick={getData}>Home</Components.Button> */}

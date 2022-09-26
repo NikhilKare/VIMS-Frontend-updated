@@ -63,12 +63,14 @@ function App() {
       <Route path="/providers"component={Admin} />
       <Route path="/payment"component={Payment} />
       <Route path="/reciept"component={Reciept} />
+    
     </Switch>
     <Footer/>
     </Router>
   
+    
     </>
-      
+    
     
   );
 }

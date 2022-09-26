@@ -63,13 +63,19 @@ const logout=()=>{
               </NavLink>
             </li>           
             </div>
+
+            <div>
+              <li>Hi, Admin
+                </li></div>
             <div>
             <li>
                 <RoleNavbar />
             </li>
             </div>
+
           </ul>
         </div>
+       
 
         {/* 3rd social media links */}
         <div className="social-media">
