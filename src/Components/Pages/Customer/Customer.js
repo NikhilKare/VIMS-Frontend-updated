@@ -356,7 +356,7 @@ function Customer(props) {
                                     <div style={{margin: "0 40%",
   width: "50%",
 }}>
-                                    {noOfPage.map(i=><button style={{padding:10,margin:10,backgroundColor:"#9B5DE5"}} className="btn btn-success btn-circle btn-md" value={i} onClick={(e)=> {e.preventDefault(); setPageNo(e.target.value)}}>&nbsp;    {i}  &nbsp;    </button>)}
+                                    {noOfPage.map(i=><button style={{padding:10,margin:10,backgroundColor:"#9B5DE5",fontSize:"10px"}} className="btn btn-success btn-circle btn-md" value={i} onClick={(e)=> {e.preventDefault(); setPageNo(e.target.value)}}>&nbsp;    {i}  &nbsp;    </button>)}
 
                                     </div>
                                 </div>

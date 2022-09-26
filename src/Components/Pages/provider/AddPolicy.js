@@ -54,7 +54,7 @@ const AddPolicy = () => {
                         <Components.Button onClick={addPolicyDetails}>Add Policy</Components.Button><br/>
                         <Components.Cancel  onClick={()=>history.push("/profile")}>Cancel</Components.Cancel>
                         <br />
-                        <img src={reg} alt="signin" width='500px' height='250px' />
+                        <img src={reg} alt="signin" style={{height:"400px"}} />
                     </Components.Form>          
             </Components.div>         
     )

@@ -52,7 +52,9 @@ const AddVehicle = () => {
                         <Components.Button onClick={addVehcleDetails}>Add Vehicle</Components.Button><br/>
                         <Components.Cancel  onClick={()=>history.push("/customer")}>Cancel</Components.Cancel>
                         <br />
-                        <img src={reg} alt="signin" width='500px' height='250px' />
+                        <img src={reg} alt="signin"
+                        style={{height:"400px"}}
+                        />
                     </Components.Form>          
             </Components.div>         
     )

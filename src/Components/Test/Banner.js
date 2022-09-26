@@ -6,7 +6,7 @@ import 'animate.css';
 import TrackVisibility from 'react-on-screen';
 import HeroSection from "../HeroSection";
 import { Link, useHistory } from "react-router-dom";
-
+import car from "../../assets/img/banner-car.svg";
 export const Banner = () => {
   const history=useHistory();
 
@@ -69,7 +69,17 @@ export const Banner = () => {
             <TrackVisibility>
               {({ isVisible }) =>
                 <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
-                  <img src={headerImg} alt="Header Img"/>
+                  <img
+                 
+                  src={headerImg} alt="Header Img"/>
+                </div>}
+            </TrackVisibility>
+          </Col>
+          <Col xs={12} md={6} xl={5}>
+            <TrackVisibility>
+              {({ isVisible }) =>
+                <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
+                  <img src={car} alt="Header Img"/>
                 </div>}
             </TrackVisibility>
           </Col>

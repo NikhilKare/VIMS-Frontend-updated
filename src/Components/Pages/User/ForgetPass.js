@@ -120,8 +120,8 @@ export const ForgetPass = (props) => {
            <Components.Form>
                 <Components.Title>Change Password</Components.Title>
 
-               <Components.Input   type='text' name="password" value={password.password} onChange={handleUpdate} placeholder="Enter New Password" />
-                <Components.Input    type='text' name="confirmPass" value={password.confirmPass} onChange={handleUpdate} placeholder="Confirm Password" />                
+               <Components.Input   type='password' name="password" value={password.password} onChange={handleUpdate} placeholder="Enter New Password" />
+                <Components.Input    type='password' name="confirmPass" value={password.confirmPass} onChange={handleUpdate} placeholder="Confirm Password" />                
                  <Components.Button onClick={changePass}>Submit</Components.Button><br />
               
                 
